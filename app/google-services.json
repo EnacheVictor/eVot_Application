@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "57049846374",
+    "project_id": "e-vote-app-a02a0",
+    "storage_bucket": "e-vote-app-a02a0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57049846374:android:95185354773439269053a7",
+        "android_client_info": {
+          "package_name": "com.victor.evotapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLw_wFNoxoT69-fSyn8K_JKEkZLWvPyfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
