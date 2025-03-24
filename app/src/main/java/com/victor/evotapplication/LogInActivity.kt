@@ -70,21 +70,24 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
         val headerView = navView.getHeaderView(0) // Ia primul header view din NavigationView
         val navUsername = headerView.findViewById<TextView>(R.id.username)
         val navEmail = headerView.findViewById<TextView>(R.id.email)
+        val navRole = headerView.findViewById<TextView>(R.id.role)
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             val uid = user.uid
 
             val db = FirebaseFirestore.getInstance()
-            val userRef = db.collection("users").document(uid)  // Referința la Firestore
+            val userRef = db.collection("user-type").document(uid)  // Referința la Firestore
 
             userRef.get().addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val username = document.getString("username") ?: "Unknown"
                     val email = document.getString("email") ?: "No Email"
+                    val role = document.getString("role") ?: "Unknown"
 
                     navUsername.text = username
                     navEmail.text = email
+                    navRole.text = role
                 }
             }.addOnFailureListener {
                 Log.e("Firestore", "Error getting user data")
