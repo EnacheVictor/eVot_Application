@@ -29,7 +29,6 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.newAccountBtn.setOnClickListener {
             createUser()
-            goToLogInActivity()
         }
     }
 
@@ -41,16 +40,17 @@ class SignUpActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d("TAGY", "createUserWithEmail:success")
                     val user = auth.currentUser
-                    Toast.makeText(baseContext, "Authentication success.", Toast.LENGTH_SHORT)
-                        .show()
-                    user?.let {
-                        saveUserToFirestore(it.uid, username, email)
+                    if (user != null) {
+                        val uid = user.uid  // Obține UID-ul utilizatorului
+                        saveUserToFirestore(uid, username, email) // Salvează în Firestore
+                    } else {
+                        Log.e("Auth", "User is null after sign-up")
                     }
+                    Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show()
+                    goToLogInActivity()
                 } else {
-                    Log.w("TAGY", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Sign-up failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }

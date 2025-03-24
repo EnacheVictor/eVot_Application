@@ -65,7 +65,7 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
         return true
     }
 
-    private fun updateNavHeader() {
+        fun updateNavHeader() {
         val navView = findViewById<NavigationView>(R.id.nav_view)
         val headerView = navView.getHeaderView(0) // Ia primul header view din NavigationView
         val navUsername = headerView.findViewById<TextView>(R.id.username)
