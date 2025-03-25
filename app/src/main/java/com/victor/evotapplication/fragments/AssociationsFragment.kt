@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.victor.evotapplication.R
 import com.victor.evotapplication.databinding.FragmentAssociationsBinding
 import java.util.UUID
 
@@ -82,6 +83,9 @@ class AssociationsFragment : Fragment() {
             .addOnSuccessListener {
                 binding.inviteCodeText.text = "Cod invitație: $inviteCode"
                 Toast.makeText(requireContext(), "Asociație creată!", Toast.LENGTH_SHORT).show()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, HomeFragment())
+                    .commit()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Eroare la creare!", Toast.LENGTH_SHORT).show()
@@ -126,10 +130,14 @@ class AssociationsFragment : Fragment() {
             .update("members", FieldValue.arrayUnion(userId))
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Alăturare reușită!", Toast.LENGTH_SHORT).show()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, HomeFragment())
+                    .commit()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Eroare la alăturare!", Toast.LENGTH_SHORT).show()
                 Log.e("Firestore", "Eroare la update", e)
             }
+
     }
 }
