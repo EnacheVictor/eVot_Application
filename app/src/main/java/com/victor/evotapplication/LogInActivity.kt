@@ -13,6 +13,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.victor.evotapplication.fragments.AboutUsFragment
+import com.victor.evotapplication.fragments.AssociationsFragment
 import com.victor.evotapplication.fragments.HomeFragment
 import com.victor.evotapplication.fragments.LogoutFragment
 import com.victor.evotapplication.fragments.SettingsFragment
@@ -59,6 +60,7 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
             R.id.nav_share -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShareFragment()).commit()
             R.id.nav_about -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AboutUsFragment()).commit()
             R.id.nav_logout -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LogoutFragment()).commit() // Se va deloga
+            R.id.nav_associations -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AssociationsFragment()).commit()
 
         }
         drawerLayout.closeDrawer(GravityCompat.START)

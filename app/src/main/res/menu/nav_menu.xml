@@ -12,6 +12,10 @@
             android:id="@+id/nav_settings"
             android:title="Settings"/>
 
+        <item
+            android:id="@+id/nav_associations"
+            android:title="Associations"/>
+
     </group>
     <item
         android:title="More">
