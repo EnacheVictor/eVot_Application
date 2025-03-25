@@ -10,7 +10,6 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.victor.evotapplication.R
 import com.victor.evotapplication.databinding.FragmentAssociationsBinding
 import java.util.UUID
 
