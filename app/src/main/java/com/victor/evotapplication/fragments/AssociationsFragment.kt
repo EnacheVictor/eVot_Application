@@ -30,7 +30,7 @@ class AssociationsFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        checkUserRole() // Verifică rolul utilizatorului curent
+        checkUserRole()
 
         return binding.root
     }
@@ -76,7 +76,8 @@ class AssociationsFragment : Fragment() {
         val assocData = hashMapOf(
             "name" to assocName,
             "adminId" to adminId,
-            "inviteCode" to inviteCode
+            "inviteCode" to inviteCode,
+            "members" to listOf(adminId)
         )
 
         db.collection("associations").add(assocData)
