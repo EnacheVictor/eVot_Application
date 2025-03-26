@@ -47,8 +47,8 @@ class SignUpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     if (user != null) {
-                        val uid = user.uid  // Obține UID-ul utilizatorului
-                        saveUserToFirestore(uid, username, email,role) // Salvează în Firestore
+                        val uid = user.uid
+                        saveUserToFirestore(uid, username, email,role)
                     } else {
                         Log.e("Auth", "User is null after sign-up")
                     }

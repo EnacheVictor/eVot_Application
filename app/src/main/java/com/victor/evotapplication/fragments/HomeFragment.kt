@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.victor.evotapplication.Association
 import com.victor.evotapplication.AssociationAdapter
-import com.victor.evotapplication.R
 import com.victor.evotapplication.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -37,7 +36,6 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-
     private fun setupRecyclerView() {
         adapter = AssociationAdapter(associationList)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -53,15 +51,15 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener { documents ->
                 associationList.clear()
                 for (document in documents) {
-                        val association = Association(
-                            id = document.id,
-                            name = document.getString("name") ?: "Fără nume",
-                            inviteCode = if (document.getString("adminId") == userId) {
-                                document.getString("inviteCode") ?: "Fără cod"
-                            } else {
-                                ""
-                            }
-                        )
+                    val isAdmin = document.getString("adminId") == userId
+                    val inviteCode = if (isAdmin) document.getString("inviteCode") ?: "Fără cod"
+                    else ""
+
+                    val association = Association(
+                        id = document.id,
+                        name = document.getString("name") ?: "Fără nume",
+                        inviteCode = inviteCode
+                    )
                     associationList.add(association)
                 }
                 adapter.notifyDataSetChanged()

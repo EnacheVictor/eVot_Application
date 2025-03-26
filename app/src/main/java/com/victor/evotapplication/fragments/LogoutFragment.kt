@@ -13,14 +13,13 @@ class LogoutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Deloghează utilizatorul imediat când fragmentul este deschis
+
         FirebaseAuth.getInstance().signOut()
 
-        // Navighează înapoi la ecranul de autentificare
         val intent = Intent(activity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
 
-        return null // Nu avem nevoie de un layout, fragmentul doar deloghează și schimbă ecranul
+        return null
     }
 }

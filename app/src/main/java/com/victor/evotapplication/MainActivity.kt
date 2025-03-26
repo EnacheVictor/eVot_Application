@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
            goToLogInActivity() // te pastreaza conectat
@@ -56,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d("TAGY", "signInWithEmail:success")
                     Toast.makeText(
                         baseContext,
@@ -65,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                     goToLogInActivity()
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w("TAGY", "signInWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
