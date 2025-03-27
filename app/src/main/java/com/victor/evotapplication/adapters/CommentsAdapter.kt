@@ -1,4 +1,4 @@
-package com.victor.evotapplication
+package com.victor.evotapplication.adapters
 
 import android.app.AlertDialog
 import android.view.LayoutInflater
@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.victor.evotapplication.R
 import com.victor.evotapplication.models.Comment
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 class CommentsAdapter(
     private val comments: List<Comment>,

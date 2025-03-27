@@ -1,6 +1,6 @@
 package com.victor.evotapplication.models
 
-import java.util.*
+import java.util.Date
 
 data class Comment(
     val id: String = "",

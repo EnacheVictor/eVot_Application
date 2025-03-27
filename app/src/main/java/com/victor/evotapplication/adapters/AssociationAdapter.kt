@@ -1,4 +1,4 @@
-package com.victor.evotapplication
+package com.victor.evotapplication.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.victor.evotapplication.R
 import com.victor.evotapplication.fragments.AssociationDetailsFragment
+import com.victor.evotapplication.models.Association
 
 class AssociationAdapter(private val associations: List<Association>) :
     RecyclerView.Adapter<AssociationAdapter.AssociationViewHolder>() {

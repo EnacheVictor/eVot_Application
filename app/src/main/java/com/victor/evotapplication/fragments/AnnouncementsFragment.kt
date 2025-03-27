@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.victor.evotapplication.AnnouncementsAdapter
+import com.victor.evotapplication.adapters.AnnouncementsAdapter
 import com.victor.evotapplication.databinding.FragmentAnnouncementsBinding
 import java.util.*
 

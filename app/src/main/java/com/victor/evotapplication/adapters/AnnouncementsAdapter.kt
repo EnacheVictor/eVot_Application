@@ -1,4 +1,4 @@
-package com.victor.evotapplication
+package com.victor.evotapplication.adapters
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -9,10 +9,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.victor.evotapplication.R
 import com.victor.evotapplication.fragments.Announcement
 import com.victor.evotapplication.fragments.CommentsFragment
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 class AnnouncementsAdapter(
     private val announcements: List<Announcement>,

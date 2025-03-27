@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.victor.evotapplication.CommentsAdapter
+import com.victor.evotapplication.adapters.CommentsAdapter
 import com.victor.evotapplication.databinding.FragmentCommentsBinding
 import com.victor.evotapplication.models.Comment
 

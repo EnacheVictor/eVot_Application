@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/voteQuestionInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type the question for the vote" />
+
+    <Button
+        android:id="@+id/selectDeadlineBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick deadline"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/selectedDeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No date selected"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/createVoteBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Vote"
+        android:layout_marginTop="24dp" />
+</LinearLayout>

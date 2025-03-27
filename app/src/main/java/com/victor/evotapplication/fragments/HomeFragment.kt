@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.victor.evotapplication.Association
-import com.victor.evotapplication.AssociationAdapter
+import com.victor.evotapplication.models.Association
+import com.victor.evotapplication.adapters.AssociationAdapter
 import com.victor.evotapplication.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

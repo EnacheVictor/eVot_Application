@@ -1,4 +1,4 @@
-package com.victor.evotapplication
+package com.victor.evotapplication.adapters
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
