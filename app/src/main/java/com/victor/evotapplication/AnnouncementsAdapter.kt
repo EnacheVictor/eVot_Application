@@ -1,12 +1,16 @@
 package com.victor.evotapplication
 
 import android.app.AlertDialog
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.evotapplication.fragments.Announcement
+import com.victor.evotapplication.fragments.CommentsFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -61,6 +65,21 @@ class AnnouncementsAdapter(
             }
             true
         }
+
+        val viewCommentsBtn = holder.itemView.findViewById<Button>(R.id.viewCommentsBtn)
+
+        viewCommentsBtn.setOnClickListener {
+            val fragment = CommentsFragment()
+            fragment.arguments = Bundle().apply {
+                putString("announcementId", announcement.id)
+            }
+
+            (holder.itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
     }
 
     override fun getItemCount(): Int = announcements.size
