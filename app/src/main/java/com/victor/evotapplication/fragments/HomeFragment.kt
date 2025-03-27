@@ -1,7 +1,6 @@
 package com.victor.evotapplication.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,8 +64,7 @@ class HomeFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Eroare la încărcare!", Toast.LENGTH_SHORT).show()
-                Log.e("Firestore", "Eroare la obținerea asociațiilor", e)
+                Toast.makeText(requireContext(), "Eroare when uploading!", Toast.LENGTH_SHORT).show()
             }
     }
 }

@@ -59,17 +59,17 @@ class AssociationsFragment : Fragment() {
     }
 
     private fun showAdminUI() {
-            binding.adminLayout.visibility = View.VISIBLE
-            binding.createAssociationBtn.setOnClickListener {
-                val assocName = binding.assocNameInput.text.toString()
-                if (assocName.isNotEmpty()) {
-                    val inviteCode = UUID.randomUUID().toString().substring(0, 6) // Cod unic de 6 caractere
-                    saveAssociationsToFirestore(assocName, inviteCode)
-                } else {
-                    Toast.makeText(requireContext(), "Introdu un nume pentru asociație!", Toast.LENGTH_SHORT).show()
-                }
+        binding.adminLayout.visibility = View.VISIBLE
+        binding.createAssociationBtn.setOnClickListener {
+            val assocName = binding.assocNameInput.text.toString()
+            if (assocName.isNotEmpty()) {
+                val inviteCode = UUID.randomUUID().toString().substring(0, 6) // Cod unic de 6 caractere
+                saveAssociationsToFirestore(assocName, inviteCode)
+            } else {
+                Toast.makeText(requireContext(), "Introdu un nume pentru asociație!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
     private fun saveAssociationsToFirestore(assocName: String, inviteCode: String) {
         val adminId = auth.currentUser?.uid ?: return
@@ -101,7 +101,7 @@ class AssociationsFragment : Fragment() {
             if (code.isNotEmpty()) {
                 joinAssociation(code)
             } else {
-                Toast.makeText(requireContext(), "Introdu un cod!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Insert code!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -115,12 +115,11 @@ class AssociationsFragment : Fragment() {
                     val assocId = documents.documents[0].id
                     addUserToAssociation(assocId)
                 } else {
-                    Toast.makeText(requireContext(), "Cod invalid!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Wrong code!", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Eroare Firestore!", Toast.LENGTH_SHORT).show()
-                Log.e("Firestore", "Eroare la căutarea asociației", e)
+                Toast.makeText(requireContext(), "Firestore error!", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -130,15 +129,16 @@ class AssociationsFragment : Fragment() {
         db.collection("associations").document(assocId)
             .update("members", FieldValue.arrayUnion(userId))
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Alăturare reușită!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Joining successful!", Toast.LENGTH_SHORT).show()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, HomeFragment())
                     .commit()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Eroare la alăturare!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Joining error!", Toast.LENGTH_SHORT).show()
                 Log.e("Firestore", "Eroare la update", e)
             }
 
     }
 }
+

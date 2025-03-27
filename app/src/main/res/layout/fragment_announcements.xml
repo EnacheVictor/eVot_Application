@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/announcementsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/announcementText"
+    <Button
+        android:id="@+id/addAnnouncementBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anunțuri"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:text="Add announcement"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/announcementsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -5,23 +5,20 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- TextView pentru titlul asociației -->
     <TextView
         android:id="@+id/associationTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Asociație"
+        android:text="Association"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 
-    <!-- TabLayout pentru a comuta între fragmente -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!-- ViewPager2 pentru a schimba fragmente -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

@@ -9,7 +9,7 @@
         android:id="@+id/associationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Numele Asociației"
+        android:text="Name of association"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -17,7 +17,7 @@
         android:id="@+id/inviteCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cod invitație"
+        android:text="Invite code"
         android:visibility="gone"
         android:textSize="14sp"
         android:textColor="#666666"/>

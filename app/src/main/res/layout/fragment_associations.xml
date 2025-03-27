@@ -22,13 +22,13 @@
 
         <Button
             android:id="@+id/createAssociationBtn"
-            android:text="Creează Asociația"
+            android:text="Create Association"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/inviteCodeText"
-            android:text="Cod invitație: -"
+            android:text="Invite code: -"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -43,14 +43,15 @@
 
         <EditText
             android:id="@+id/joinCodeInput"
-            android:hint="Introdu cod invitație"
+            android:hint="Insert invite code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/joinAssociationBtn"
-            android:text="Alătură-te"
+            android:text="Join"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>
+

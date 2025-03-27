@@ -27,9 +27,9 @@ class AssociationAdapter(private val associations: List<Association>) :
     override fun onBindViewHolder(holder: AssociationViewHolder, position: Int) {
         val association = associations[position]
         holder.assocName.text = association.name
-        holder.inviteCode.text = "Cod: ${association.inviteCode}"
+        holder.inviteCode.text = "Code: ${association.inviteCode}"
         if (association.inviteCode.isNotEmpty()) {
-            holder.inviteCode.text = "Cod: ${association.inviteCode}"
+            holder.inviteCode.text = "Code: ${association.inviteCode}"
             holder.inviteCode.visibility = View.VISIBLE
         } else {
             holder.inviteCode.visibility = View.GONE

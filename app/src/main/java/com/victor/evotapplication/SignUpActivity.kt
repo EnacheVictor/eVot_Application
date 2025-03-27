@@ -37,8 +37,8 @@ class SignUpActivity : AppCompatActivity() {
         val username = binding.username.text.toString()
         val role = binding.roleSpinner.selectedItem.toString()
 
-        if (role == "Selectează un rol") {
-            Toast.makeText(this, "Te rog să selectezi un rol!", Toast.LENGTH_SHORT).show()
+        if (role == "Select role") {
+            Toast.makeText(this, "Please select a role!", Toast.LENGTH_SHORT).show()
             return
         }
 
