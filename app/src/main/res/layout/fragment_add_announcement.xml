@@ -3,13 +3,16 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
+    android:background="@color/light_purple"
     android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/titleInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Announcement title" />
+        android:hint="Announcement title"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"/>
 
     <EditText
         android:id="@+id/contentInput"
@@ -17,6 +20,8 @@
         android:layout_height="wrap_content"
         android:minLines="3"
         android:hint="Announcement content"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:gravity="top"
         android:layout_marginTop="8dp" />
 

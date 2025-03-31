@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name of association"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -20,5 +21,6 @@
         android:text="Invite code"
         android:visibility="gone"
         android:textSize="14sp"
+        android:layout_marginBottom="6dp"
         android:textColor="#666666"/>
 </LinearLayout>

@@ -9,6 +9,8 @@
         android:id="@+id/editTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:hint="Announcements title" />
 
     <EditText
@@ -16,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Announcement content"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:minLines="3"
         android:layout_marginTop="8dp"
         android:gravity="top" />
@@ -24,7 +28,7 @@
         android:id="@+id/saveEditedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save changese"
+        android:text="Save changes"
         android:layout_marginTop="16dp"/>
 </LinearLayout>
 

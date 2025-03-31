@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/light_purple"
     android:padding="16dp">
 
     <!-- UI pentru Admin -->
@@ -17,6 +18,8 @@
         <EditText
             android:id="@+id/assocNameInput"
             android:hint="Nume Asociație"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -29,6 +32,8 @@
         <TextView
             android:id="@+id/inviteCodeText"
             android:text="Invite code: -"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -44,6 +49,8 @@
         <EditText
             android:id="@+id/joinCodeInput"
             android:hint="Insert invite code"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

@@ -32,6 +32,7 @@ class AssociationDetailsFragment : Fragment() {
             tab.text = if (position == 0) "Announcements" else "Votes"
         }.attach()
 
+
         binding.associationTitle.text = associationName ?: "Association"
 
         return binding.root

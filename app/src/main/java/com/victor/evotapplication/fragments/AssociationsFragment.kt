@@ -63,7 +63,7 @@ class AssociationsFragment : Fragment() {
         binding.createAssociationBtn.setOnClickListener {
             val assocName = binding.assocNameInput.text.toString()
             if (assocName.isNotEmpty()) {
-                val inviteCode = UUID.randomUUID().toString().substring(0, 6) // Cod unic de 6 caractere
+                val inviteCode = UUID.randomUUID().toString().substring(0, 6)
                 saveAssociationsToFirestore(assocName, inviteCode)
             } else {
                 Toast.makeText(requireContext(), "Introdu un nume pentru asociație!", Toast.LENGTH_SHORT).show()

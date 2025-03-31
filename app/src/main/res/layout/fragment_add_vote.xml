@@ -2,12 +2,15 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
+    android:background="@color/light_purple"
     android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/voteQuestionInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:hint="Type the question for the vote" />
 
     <Button
@@ -22,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No date selected"
+        android:textColor="#222222"
         android:layout_marginTop="8dp" />
 
     <Button
