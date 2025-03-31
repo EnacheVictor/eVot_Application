@@ -33,7 +33,8 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
-        android:background="@color/teal_700"
+        android:background="@color/card_background"
+        app:itemBackground="@drawable/drawer_item_background"
         app:itemIconTint="@color/lavender"
-        app:itemTextColor="@color/lavender"/>
+        app:itemTextColor="@color/text_dark"/>
 </androidx.drawerlayout.widget.DrawerLayout>
