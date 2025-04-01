@@ -2,6 +2,8 @@ package com.victor.evotapplication.models
 
 import java.util.Date
 
+// Data model representing a vote
+
 data class Vote(
     val id: String = "",
     val question: String = "",

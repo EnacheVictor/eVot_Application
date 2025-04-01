@@ -19,6 +19,8 @@ import com.victor.evotapplication.fragments.LogoutFragment
 import com.victor.evotapplication.fragments.SettingsFragment
 import com.victor.evotapplication.fragments.ShareFragment
 
+// Main activity that handles navigation drawer and fragment switching
+
 class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerLayout: DrawerLayout
@@ -52,14 +54,11 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_home -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, HomeFragment()).commit()
-
-            R.id.nav_settings -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, SettingsFragment()).commit()
+            R.id.nav_home -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+            R.id.nav_settings -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SettingsFragment()).commit()
             R.id.nav_share -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShareFragment()).commit()
             R.id.nav_about -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AboutUsFragment()).commit()
-            R.id.nav_logout -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LogoutFragment()).commit() // Se va deloga
+            R.id.nav_logout -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LogoutFragment()).commit()
             R.id.nav_associations -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AssociationsFragment()).commit()
 
         }
@@ -67,9 +66,11 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
         return true
     }
 
+    // Updates the Navigation Drawer header with user data from Firestore
+
     fun updateNavHeader() {
         val navView = findViewById<NavigationView>(R.id.nav_view)
-        val headerView = navView.getHeaderView(0) // Ia primul header view din NavigationView
+        val headerView = navView.getHeaderView(0)
         val navUsername = headerView.findViewById<TextView>(R.id.username)
         val navEmail = headerView.findViewById<TextView>(R.id.email)
         val navRole = headerView.findViewById<TextView>(R.id.role)
@@ -79,7 +80,9 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
             val uid = user.uid
 
             val db = FirebaseFirestore.getInstance()
-            val userRef = db.collection("user-type").document(uid)  // Referința la Firestore
+            val userRef = db.collection("user-type").document(uid)
+
+            // Get user data from Firestore and set text fields
 
             userRef.get().addOnSuccessListener { document ->
                 if (document != null && document.exists()) {

@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.victor.evotapplication.databinding.FragmentEditAnnouncementBinding
 
+// Fragment for editing an existing announcement in Firestore
+
 class EditAnnouncementFragment : Fragment() {
 
     private lateinit var binding: FragmentEditAnnouncementBinding
@@ -38,6 +40,8 @@ class EditAnnouncementFragment : Fragment() {
 
         return binding.root
     }
+
+    // Validates and updates the announcement in Firestore
 
     private fun saveEditedAnnouncement() {
         val newTitle = binding.editTitle.text.toString().trim()

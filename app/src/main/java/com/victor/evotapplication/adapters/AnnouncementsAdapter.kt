@@ -22,6 +22,8 @@ class AnnouncementsAdapter(
     private val onEdit: (Announcement) -> Unit
 ) : RecyclerView.Adapter<AnnouncementsAdapter.AnnouncementViewHolder>() {
 
+    // ViewHolder class to hold views for each announcement item
+
     inner class AnnouncementViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.ann_title)
         val content: TextView = view.findViewById(R.id.ann_content)
@@ -34,6 +36,8 @@ class AnnouncementsAdapter(
             .inflate(R.layout.item_announcements, parent, false)
         return AnnouncementViewHolder(view)
     }
+
+    // Binds data to each ViewHolder based on position in list
 
     override fun onBindViewHolder(holder: AnnouncementViewHolder, position: Int) {
         val announcement = announcements[position]
@@ -48,6 +52,8 @@ class AnnouncementsAdapter(
         } ?: run {
             holder.date.text = ""
         }
+
+        //Admin edit and erase announcement
 
         holder.itemView.setOnClickListener {
             if (isAdmin) {
@@ -66,6 +72,8 @@ class AnnouncementsAdapter(
             }
             true
         }
+
+        // "View Comments" button: open CommentsFragment and pass announcement ID
 
         val viewCommentsBtn = holder.itemView.findViewById<Button>(R.id.viewCommentsBtn)
 

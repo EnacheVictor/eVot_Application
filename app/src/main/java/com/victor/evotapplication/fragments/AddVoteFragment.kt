@@ -12,6 +12,8 @@ import com.victor.evotapplication.databinding.FragmentAddVoteBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
+// Fragment for creating a new vote within an association
+
 class AddVoteFragment : Fragment() {
 
     private lateinit var binding: FragmentAddVoteBinding
@@ -42,6 +44,8 @@ class AddVoteFragment : Fragment() {
         return binding.root
     }
 
+    // Opens a DatePicker followed by TimePicker to choose deadline
+
     private fun showDateTimePicker() {
         val calendar = Calendar.getInstance()
 
@@ -55,6 +59,8 @@ class AddVoteFragment : Fragment() {
             }, 12, 0, true).show()
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
     }
+
+    // Validates input and saves new vote to Firestore
 
     private fun createVote() {
         val question = binding.voteQuestionInput.text.toString().trim()

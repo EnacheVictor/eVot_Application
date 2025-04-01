@@ -11,6 +11,8 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.victor.evotapplication.databinding.FragmentAddAnnouncementBinding
 
+// Fragment for creating and saving a new announcement to Firestore
+
 class AddAnnouncementFragment : Fragment() {
 
     private lateinit var binding: FragmentAddAnnouncementBinding
@@ -37,6 +39,8 @@ class AddAnnouncementFragment : Fragment() {
         return binding.root
     }
 
+    // Retrieves the current user's username from Firestore
+
     private fun getCurrentUsername() {
         val userId = auth.currentUser?.uid ?: return
         db.collection("user-type").document(userId).get()
@@ -44,6 +48,8 @@ class AddAnnouncementFragment : Fragment() {
                 currentUsername = document.getString("username")
             }
     }
+
+    // Validates and sends announcement data to Firestore
 
     private fun addAnnouncement() {
         val title = binding.titleInput.text.toString().trim()
@@ -54,6 +60,8 @@ class AddAnnouncementFragment : Fragment() {
             Toast.makeText(requireContext(), "Complete all fields!", Toast.LENGTH_SHORT).show()
             return
         }
+
+        // Construct announcement object
 
         val announcement = hashMapOf(
             "title" to title,

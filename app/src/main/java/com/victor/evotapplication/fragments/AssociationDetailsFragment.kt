@@ -9,6 +9,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.victor.evotapplication.adapters.AssociationPagerAdapter
 import com.victor.evotapplication.databinding.FragmentAssociationDetailsBinding
 
+// Fragment that displays the details of an association with tabs for Announcements and Votes
+
+
 class AssociationDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentAssociationDetailsBinding

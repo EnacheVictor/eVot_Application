@@ -14,6 +14,8 @@ import com.victor.evotapplication.databinding.FragmentVotesBinding
 import com.victor.evotapplication.models.Vote
 import java.util.*
 
+// Fragment for displaying and managing votes in an association
+
 class VotesFragment : Fragment() {
 
     private lateinit var binding: FragmentVotesBinding
@@ -35,6 +37,8 @@ class VotesFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
 
         associationId = arguments?.getString("associationId")
+
+        // Navigate to AddVoteFragment
 
         binding.addVoteBtn.setOnClickListener {
             val fragment = AddVoteFragment()

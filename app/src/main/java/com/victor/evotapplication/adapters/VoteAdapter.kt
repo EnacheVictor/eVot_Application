@@ -13,6 +13,8 @@ import com.victor.evotapplication.models.Vote
 import java.text.SimpleDateFormat
 import java.util.*
 
+// Adapter for displaying and interacting with a list of votes in a RecyclerView
+
 class VoteAdapter(
     private val votes: List<Vote>,
     private val isAdmin: Boolean,
@@ -42,6 +44,8 @@ class VoteAdapter(
         return VoteViewHolder(view)
     }
 
+    // Binds vote data to the view and handles voting logic
+
     override fun onBindViewHolder(holder: VoteViewHolder, position: Int) {
         val vote = votes[position]
         val userId = auth.currentUser?.uid ?: return
@@ -68,6 +72,7 @@ class VoteAdapter(
             holder.abstainBtn.visibility = View.GONE
         }
 
+        // Double voting check
         db.collection("votes").document(vote.id)
             .collection("responses").document(userId)
             .get()
@@ -85,7 +90,7 @@ class VoteAdapter(
                 }
             }
 
-        // Calcul voturi
+        // Vote results
         db.collection("votes").document(vote.id)
             .collection("responses")
             .get()
@@ -102,6 +107,8 @@ class VoteAdapter(
                 }
                 holder.resultText.text = "Yes: $yes | No: $no | Mă abțin: $abstin"
             }
+
+        // Cancel vote logic for admins
 
         holder.cancelVoteBtn.setOnClickListener {
             AlertDialog.Builder(holder.itemView.context)
@@ -121,6 +128,8 @@ class VoteAdapter(
     }
 
     override fun getItemCount(): Int = votes.size
+
+    // Submits a vote to Firestore
 
     private fun vote(userId: String, voteId: String, answer: String) {
         val response = hashMapOf(

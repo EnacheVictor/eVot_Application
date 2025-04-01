@@ -14,6 +14,8 @@ import com.victor.evotapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // Entry activity of the app; handles login and navigation to sign-up
+
     private lateinit var auth: FirebaseAuth
     lateinit var  binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +51,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    // Handles email/password authentication using Firebase
 
     fun signInWithEmailAndPassword(email: String , password:String)
     {

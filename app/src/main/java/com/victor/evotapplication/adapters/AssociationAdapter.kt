@@ -11,6 +11,8 @@ import com.victor.evotapplication.R
 import com.victor.evotapplication.fragments.AssociationDetailsFragment
 import com.victor.evotapplication.models.Association
 
+// Adapter for displaying a list of associations in a RecyclerView
+
 class AssociationAdapter(private val associations: List<Association>) :
     RecyclerView.Adapter<AssociationAdapter.AssociationViewHolder>() {
 
@@ -26,16 +28,21 @@ class AssociationAdapter(private val associations: List<Association>) :
         return AssociationViewHolder(view)
     }
 
+    // Binds data from the association object to the views
+
     override fun onBindViewHolder(holder: AssociationViewHolder, position: Int) {
         val association = associations[position]
         holder.assocName.text = association.name
         holder.inviteCode.text = "Code: ${association.inviteCode}"
+
         if (association.inviteCode.isNotEmpty()) {
             holder.inviteCode.text = "Code: ${association.inviteCode}"
             holder.inviteCode.visibility = View.VISIBLE
         } else {
             holder.inviteCode.visibility = View.GONE
         }
+       // Open the AssociationDetailsFragment and pass association data
+
         holder.itemView.setOnClickListener {
             val fragment = AssociationDetailsFragment()
             val bundle = Bundle()

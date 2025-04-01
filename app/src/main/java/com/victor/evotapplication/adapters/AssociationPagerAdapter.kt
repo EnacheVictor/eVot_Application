@@ -6,6 +6,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.victor.evotapplication.fragments.AnnouncementsFragment
 import com.victor.evotapplication.fragments.VotesFragment
 
+// Pager adapter for switching between Announcements and Votes fragments in a ViewPager2
+
 class AssociationPagerAdapter(
     fragment: Fragment,
     private val associationId: String?

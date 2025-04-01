@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.victor.evotapplication.MainActivity
 
+// Fragment that signs the user out and redirects to the login screen (MainActivity)
+
 class LogoutFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -15,6 +15,8 @@ import com.victor.evotapplication.adapters.CommentsAdapter
 import com.victor.evotapplication.databinding.FragmentCommentsBinding
 import com.victor.evotapplication.models.Comment
 
+// Fragment for displaying, adding, and deleting comments related to an announcement
+
 class CommentsFragment : Fragment() {
 
     private lateinit var binding: FragmentCommentsBinding
@@ -69,6 +71,8 @@ class CommentsFragment : Fragment() {
         binding.commentsRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.commentsRecycler.adapter = adapter
     }
+
+    // Load comments for the current announcement and listen for real-time updates
 
     private fun loadComments() {
         db.collection("comments")

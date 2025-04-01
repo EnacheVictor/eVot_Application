@@ -13,6 +13,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.victor.evotapplication.databinding.ActivitySignUpBinding
 
+// Activity for user registration and Firebase authentication
+
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -30,6 +32,8 @@ class SignUpActivity : AppCompatActivity() {
             createUser()
         }
     }
+
+    // Creates a new user with email and password using Firebase Auth
 
     private fun createUser() {
         val email = binding.createAccEmail.text.toString()
@@ -63,6 +67,8 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
     }
+
+    // Saves user data (username, email, role) to Firestore under "user-type" collection
 
     private fun saveUserToFirestore(uid: String, username: String, email: String, role: String) {
         val db = Firebase.firestore

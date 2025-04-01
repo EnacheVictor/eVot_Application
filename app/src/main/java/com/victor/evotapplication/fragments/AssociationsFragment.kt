@@ -14,6 +14,7 @@ import com.victor.evotapplication.R
 import com.victor.evotapplication.databinding.FragmentAssociationsBinding
 import java.util.UUID
 
+// Fragment that allows admins to create associations and users to join one using an invite code
 
 class AssociationsFragment : Fragment() {
 
@@ -35,6 +36,7 @@ class AssociationsFragment : Fragment() {
         return binding.root
     }
 
+    // Get the current user's role from Firestore
 
     private fun checkUserRole() {
         val userId = auth.currentUser?.uid ?: return
@@ -58,6 +60,8 @@ class AssociationsFragment : Fragment() {
         }
     }
 
+    // Show admin-specific UI and handle association creation
+
     private fun showAdminUI() {
         binding.adminLayout.visibility = View.VISIBLE
         binding.createAssociationBtn.setOnClickListener {
@@ -70,6 +74,8 @@ class AssociationsFragment : Fragment() {
             }
         }
     }
+
+    // Save the new association in Firestore
 
     private fun saveAssociationsToFirestore(assocName: String, inviteCode: String) {
         val adminId = auth.currentUser?.uid ?: return
@@ -106,6 +112,8 @@ class AssociationsFragment : Fragment() {
         }
     }
 
+    // Find the association by invite code and join it
+
     private fun joinAssociation(code: String) {
         db.collection("associations")
             .whereEqualTo("inviteCode", code)
@@ -122,6 +130,8 @@ class AssociationsFragment : Fragment() {
                 Toast.makeText(requireContext(), "Firestore error!", Toast.LENGTH_SHORT).show()
             }
     }
+
+    // Add current user to the selected association
 
     private fun addUserToAssociation(assocId: String) {
         val userId = auth.currentUser?.uid ?: return

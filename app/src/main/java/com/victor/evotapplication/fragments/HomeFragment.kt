@@ -13,6 +13,8 @@ import com.victor.evotapplication.models.Association
 import com.victor.evotapplication.adapters.AssociationAdapter
 import com.victor.evotapplication.databinding.FragmentHomeBinding
 
+// Home screen fragment displaying the list of associations the user is part of
+
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -40,6 +42,8 @@ class HomeFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
     }
+
+    // Fetches all associations where the current user is a member
 
     private fun fetchUserAssociations() {
         val userId = auth.currentUser?.uid ?: return

@@ -14,6 +14,8 @@ import com.victor.evotapplication.adapters.AnnouncementsAdapter
 import com.victor.evotapplication.databinding.FragmentAnnouncementsBinding
 import java.util.*
 
+// Data model for announcements
+
 data class Announcement(
     val id: String = "",
     val title: String = "",
@@ -21,6 +23,8 @@ data class Announcement(
     val createdByUsername: String = "",
     val timestamp: Date? = null
 )
+
+// Fragment for displaying a list of announcements in an association
 
 class AnnouncementsFragment : Fragment() {
 
@@ -46,6 +50,8 @@ class AnnouncementsFragment : Fragment() {
         setupRecyclerView()
         loadAnnouncements()
 
+        // Navigate to AddAnnouncementFragment
+
         binding.addAnnouncementBtn.setOnClickListener {
             val fragment = AddAnnouncementFragment()
             fragment.arguments = Bundle().apply {
@@ -60,6 +66,8 @@ class AnnouncementsFragment : Fragment() {
         return binding.root
     }
 
+    // Configures RecyclerView and attaches the adapter
+
     private fun setupRecyclerView() {
         adapter = AnnouncementsAdapter(announcementsList,
             isAdmin = isAdmin,
@@ -68,6 +76,8 @@ class AnnouncementsFragment : Fragment() {
         binding.announcementsRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.announcementsRecycler.adapter = adapter
     }
+
+    // Fetches announcements from Firestore for the current association
 
     private fun loadAnnouncements() {
 
@@ -115,6 +125,8 @@ class AnnouncementsFragment : Fragment() {
             }
     }
 
+    // Deletes an announcement from Firestore and refreshes list
+
     private fun deleteAnnouncement(announcement: Announcement) {
         db.collection("announcements").document(announcement.id)
             .delete()
@@ -126,6 +138,8 @@ class AnnouncementsFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error when deleting", Toast.LENGTH_SHORT).show()
             }
     }
+
+    // Navigates to EditAnnouncementFragment and passes current announcement data
 
     private fun editAnnouncement(announcement: Announcement) {
         val fragment = EditAnnouncementFragment()

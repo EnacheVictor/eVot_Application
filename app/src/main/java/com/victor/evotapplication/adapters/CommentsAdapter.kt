@@ -11,6 +11,8 @@ import com.victor.evotapplication.models.Comment
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+// Adapter for displaying a list of comments in a RecyclerView
+
 class CommentsAdapter(
     private val comments: List<Comment>,
     private val currentUserId: String,
@@ -41,6 +43,8 @@ class CommentsAdapter(
         } ?: run {
             holder.timestamp.text = ""
         }
+
+        // Own commentary delete
 
         holder.itemView.setOnLongClickListener {
             if (comment.userId == currentUserId) {
