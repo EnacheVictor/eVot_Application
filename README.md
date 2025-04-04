@@ -39,7 +39,7 @@ Residents can join associations, view content, comment, and cast votes easily.
 
 ## 📦 Built With
 
-- **Kotlin** + Android Jetpack
+- **Kotlin** + **Android Studio**
 - **Firebase Authentication**
 - **Firebase Firestore**
 - ViewPager2 + TabLayout
@@ -67,9 +67,6 @@ Download your google-services.json and place it in the /app folder
 Run the app on an emulator or Android device (API 24+ recommended)
 
 🔐 Example Firestore Rules
-js
-Copy
-Edit
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -80,14 +77,10 @@ service cloud.firestore {
 }
 ✅ You can customize more strict rules based on user roles (admin vs resident)
 
-🤝 Contributing
-Contributions are welcome!
-Feel free to fork, open issues, or submit a pull request.
+📜 License
+Licensed under the MIT License.
+Free to use, modify, distribute – no liability.
 
-👤 Author
-Victor Enache
-📍 github.com/EnacheVictor
-
-yaml
-Copy
-Edit
+🙌 Credits
+Created with ❤️ by EnacheVictor
+Feel free to fork, remix, or share!
