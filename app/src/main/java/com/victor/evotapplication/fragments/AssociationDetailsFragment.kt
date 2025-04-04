@@ -32,11 +32,17 @@ class AssociationDetailsFragment : Fragment() {
         binding.viewPager.adapter = pagerAdapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = if (position == 0) "Announcements" else "Votes"
+            tab.text = when (position) {
+                0 -> "Chat"
+                1 -> "Announcements"
+                2 -> "Votes"
+                else -> ""
+            }
         }.attach()
 
 
         binding.associationTitle.text = associationName ?: "Association"
+
 
         return binding.root
     }

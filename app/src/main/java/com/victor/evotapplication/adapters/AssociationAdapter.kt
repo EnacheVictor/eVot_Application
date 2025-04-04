@@ -18,6 +18,7 @@ class AssociationAdapter(private val associations: List<Association>) :
 
     class AssociationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val assocName: TextView = view.findViewById(R.id.associationName)
+        val assocLocation: TextView = view.findViewById(R.id.associationLocation)
 
     }
 
@@ -32,6 +33,7 @@ class AssociationAdapter(private val associations: List<Association>) :
     override fun onBindViewHolder(holder: AssociationViewHolder, position: Int) {
         val association = associations[position]
         holder.assocName.text = association.name
+        holder.assocLocation.text = association.location
 
        // Open the AssociationDetailsFragment and pass association data
 
@@ -40,6 +42,7 @@ class AssociationAdapter(private val associations: List<Association>) :
             val bundle = Bundle()
             bundle.putString("associationId", association.id)
             bundle.putString("associationName", association.name)
+            bundle.putString("associationLocation", association.location)
             fragment.arguments = bundle
 
             (holder.itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()

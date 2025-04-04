@@ -51,7 +51,7 @@ class AddResidentFragment : Fragment() {
             .get()
             .addOnSuccessListener { documents ->
                 adminAssociations = documents.map {
-                    Association(it.id, it.getString("name") ?: "No name")
+                    Association(it.id, it.getString("name") ?: "No name", it.getString("location") ?: "No location")
                 }
 
                 val adapter = object : ArrayAdapter<String>(

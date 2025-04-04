@@ -14,5 +14,14 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/associationLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Association Location"
+        android:textSize="14sp"
+        android:textColor="@color/text_dark"
+        android:layout_marginBottom="20dp" />
+
 
 </LinearLayout>

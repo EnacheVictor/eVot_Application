@@ -23,6 +23,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <EditText
+            android:id="@+id/assocLocationInput"
+            android:hint="Location of association:"
+            android:textColorHint="@color/text_dark"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <Button
             android:id="@+id/createAssociationBtn"
             android:text="Create Association"

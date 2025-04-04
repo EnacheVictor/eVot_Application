@@ -30,7 +30,7 @@
             android:id="@+id/generateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Generate unic code" />
+            android:text="Generate unique code" />
 
         <TextView
             android:id="@+id/generatedCode"

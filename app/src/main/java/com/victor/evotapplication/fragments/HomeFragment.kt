@@ -62,7 +62,8 @@ class HomeFragment : Fragment() {
 
                     val association = Association(
                         id = document.id,
-                        name = document.getString("name") ?: "No name"
+                        name = document.getString("name") ?: "No name",
+                        location = document.getString("location") ?: "No location"
                     )
                     associationList.add(association)
                 }

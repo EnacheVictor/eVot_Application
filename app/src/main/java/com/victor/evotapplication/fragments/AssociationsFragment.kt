@@ -64,21 +64,28 @@ class AssociationsFragment : Fragment() {
         binding.adminLayout.visibility = View.VISIBLE
         binding.createAssociationBtn.setOnClickListener {
             val assocName = binding.assocNameInput.text.toString()
+            val assocLocation = binding.assocLocationInput.text.toString()
             if (assocName.isNotEmpty()) {
-                saveAssociationsToFirestore(assocName)
+                saveAssociationsToFirestore(assocName, assocLocation)
             } else {
-                Toast.makeText(requireContext(), "Insert Name for Association!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Insert Name for Association!", Toast.LENGTH_SHORT)
+                    .show()
             }
+            if (assocLocation.isEmpty()) {
+            Toast.makeText(requireContext(), "Insert Location for Association!", Toast.LENGTH_SHORT)
+                .show()
         }
+    }
     }
 
     // Save the new association in Firestore
 
-    private fun saveAssociationsToFirestore(assocName: String) {
+    private fun saveAssociationsToFirestore(assocName: String, assocLocation: String) {
         val adminId = auth.currentUser?.uid ?: return
         val assocData = hashMapOf(
             "name" to assocName,
             "adminId" to adminId,
+            "location" to assocLocation,
             "members" to listOf(adminId)
         )
 
