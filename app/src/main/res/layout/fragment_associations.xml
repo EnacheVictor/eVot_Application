@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/light_purple"
+    android:background="@drawable/login"
     android:padding="16dp">
 
-    <!-- UI pentru Admin -->
+    <!-- UI for Admin -->
     <LinearLayout
         android:id="@+id/adminLayout"
         android:visibility="gone"
@@ -17,7 +17,7 @@
 
         <EditText
             android:id="@+id/assocNameInput"
-            android:hint="Nume Asociație"
+            android:hint="Name of association:"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <!-- UI pentru Locatar -->
+    <!-- UI for User -->
     <LinearLayout
         android:id="@+id/locatarLayout"
         android:visibility="gone"

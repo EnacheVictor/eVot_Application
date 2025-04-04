@@ -86,7 +86,7 @@ class VoteAdapter(
                 } else if (vote.active && !expired) {
                     holder.daBtn.setOnClickListener { vote(userId, vote.id, "YES") }
                     holder.nuBtn.setOnClickListener { vote(userId, vote.id, "NO") }
-                    holder.abstainBtn.setOnClickListener { vote(userId, vote.id, "I abstain") }
+                    holder.abstainBtn.setOnClickListener { vote(userId, vote.id, "Abstain") }
                 }
             }
 
@@ -102,10 +102,10 @@ class VoteAdapter(
                     when (doc.getString("answer")) {
                         "YES" -> yes++
                         "NO" -> no++
-                        "I abstain" -> abstin++
+                        "Abstain" -> abstin++
                     }
                 }
-                holder.resultText.text = "Yes: $yes | No: $no | Mă abțin: $abstin"
+                holder.resultText.text = "Yes: $yes | No: $no | Abstain: $abstin"
             }
 
         // Cancel vote logic for admins
