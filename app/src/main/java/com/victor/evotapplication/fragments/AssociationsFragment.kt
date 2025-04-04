@@ -12,8 +12,6 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.victor.evotapplication.R
 import com.victor.evotapplication.databinding.FragmentAssociationsBinding
-import java.util.UUID
-
 // Fragment that allows admins to create associations and users to join one using an invite code
 
 class AssociationsFragment : Fragment() {
@@ -67,35 +65,32 @@ class AssociationsFragment : Fragment() {
         binding.createAssociationBtn.setOnClickListener {
             val assocName = binding.assocNameInput.text.toString()
             if (assocName.isNotEmpty()) {
-                val inviteCode = UUID.randomUUID().toString().substring(0, 6)
-                saveAssociationsToFirestore(assocName, inviteCode)
+                saveAssociationsToFirestore(assocName)
             } else {
-                Toast.makeText(requireContext(), "Introdu un nume pentru asociație!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Insert Name for Association!", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     // Save the new association in Firestore
 
-    private fun saveAssociationsToFirestore(assocName: String, inviteCode: String) {
+    private fun saveAssociationsToFirestore(assocName: String) {
         val adminId = auth.currentUser?.uid ?: return
         val assocData = hashMapOf(
             "name" to assocName,
             "adminId" to adminId,
-            "inviteCode" to inviteCode,
             "members" to listOf(adminId)
         )
 
         db.collection("associations").add(assocData)
             .addOnSuccessListener {
-                binding.inviteCodeText.text = "Cod invitație: $inviteCode"
-                Toast.makeText(requireContext(), "Asociație creată!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Association created!", Toast.LENGTH_SHORT).show()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, HomeFragment())
                     .commit()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Eroare la creare!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error creating!", Toast.LENGTH_SHORT).show()
                 Log.e("Firestore", "Eroare la salvare", e)
             }
     }
@@ -115,19 +110,29 @@ class AssociationsFragment : Fragment() {
     // Find the association by invite code and join it
 
     private fun joinAssociation(code: String) {
-        db.collection("associations")
-            .whereEqualTo("inviteCode", code)
+        val userId = auth.currentUser?.uid ?: return
+
+        db.collection("invites").document(code)
             .get()
-            .addOnSuccessListener { documents ->
-                if (!documents.isEmpty) {
-                    val assocId = documents.documents[0].id
-                    addUserToAssociation(assocId)
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val associationId = document.getString("associationId") ?: ""
+                    val used = document.getBoolean("used") ?: false
+                    val timestamp = document.getLong("timestamp") ?: 0L
+                    val isExpired = System.currentTimeMillis() - timestamp > 24 * 60 * 60 * 1000
+
+                    if (!used && !isExpired) {
+                        addUserToAssociation(associationId)
+                        document.reference.delete()
+                    } else {
+                        Toast.makeText(requireContext(), "Code expired or already used.", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(requireContext(), "Wrong code!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Invalid code!", Toast.LENGTH_SHORT).show()
                 }
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Firestore error!", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Error fetching code.", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -146,7 +151,6 @@ class AssociationsFragment : Fragment() {
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Joining error!", Toast.LENGTH_SHORT).show()
-                Log.e("Firestore", "Eroare la update", e)
             }
 
     }

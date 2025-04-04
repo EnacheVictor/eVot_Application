@@ -18,7 +18,6 @@ class AssociationAdapter(private val associations: List<Association>) :
 
     class AssociationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val assocName: TextView = view.findViewById(R.id.associationName)
-        val inviteCode: TextView = view.findViewById(R.id.inviteCode)
 
     }
 
@@ -33,14 +32,7 @@ class AssociationAdapter(private val associations: List<Association>) :
     override fun onBindViewHolder(holder: AssociationViewHolder, position: Int) {
         val association = associations[position]
         holder.assocName.text = association.name
-        holder.inviteCode.text = "Code: ${association.inviteCode}"
 
-        if (association.inviteCode.isNotEmpty()) {
-            holder.inviteCode.text = "Code: ${association.inviteCode}"
-            holder.inviteCode.visibility = View.VISIBLE
-        } else {
-            holder.inviteCode.visibility = View.GONE
-        }
        // Open the AssociationDetailsFragment and pass association data
 
         holder.itemView.setOnClickListener {

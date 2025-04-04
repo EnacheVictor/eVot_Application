@@ -16,16 +16,13 @@
         android:textStyle="bold"
         android:paddingBottom="10dp"/>
 
-    <TextView
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Invite Code"
+        android:id="@+id/add_resident"
         android:visibility="gone"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:paddingBottom="10dp"/>
+        android:text="Add Resident"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

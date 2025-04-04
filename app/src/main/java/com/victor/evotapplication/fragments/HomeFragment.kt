@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.victor.evotapplication.R
 import com.victor.evotapplication.models.Association
 import com.victor.evotapplication.adapters.AssociationAdapter
 import com.victor.evotapplication.databinding.FragmentHomeBinding
@@ -53,22 +54,29 @@ class HomeFragment : Fragment() {
             .get()
             .addOnSuccessListener { documents ->
                 associationList.clear()
+                var isUserAdmin = false
+
                 for (document in documents) {
                     val isAdmin = document.getString("adminId") == userId
-                    val inviteCode = if (isAdmin) document.getString("inviteCode") ?: "Fără cod"
-                    else ""
+                    if (isAdmin) isUserAdmin = true
 
                     val association = Association(
                         id = document.id,
-                        name = document.getString("name") ?: "Fără nume",
-                        inviteCode = inviteCode
+                        name = document.getString("name") ?: "No name"
                     )
                     associationList.add(association)
                 }
+                binding.addResident.visibility = if (isUserAdmin) View.VISIBLE else View.GONE
                 adapter.notifyDataSetChanged()
+                binding.addResident.setOnClickListener {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, AddResidentFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Eroare when uploading!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error when uploading!", Toast.LENGTH_SHORT).show()
             }
     }
 }
