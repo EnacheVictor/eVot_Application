@@ -39,7 +39,7 @@ Residents can join associations, view content, comment, and cast votes easily.
 
 ## 📦 Built With
 
-- **Kotlin** + Android Jetpack
+- **Kotlin** + **Android Studio**
 - **Firebase Authentication**
 - **Firebase Firestore**
 - ViewPager2 + TabLayout
@@ -54,9 +54,9 @@ Residents can join associations, view content, comment, and cast votes easily.
 1. Clone the repository:
    ```bash
    git clone https://github.com/EnacheVictor/eVot_Application.git
-Open it in Android Studio
+2. Open it in Android Studio
 
-Create a Firebase project and enable:
+3. Create a Firebase project and enable:
 
 🔑 Email/Password Authentication
 
@@ -66,28 +66,28 @@ Download your google-services.json and place it in the /app folder
 
 Run the app on an emulator or Android device (API 24+ recommended)
 
-🔐 Example Firestore Rules
-js
-Copy
-Edit
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
-✅ You can customize more strict rules based on user roles (admin vs resident)
 
-🤝 Contributing
-Contributions are welcome!
-Feel free to fork, open issues, or submit a pull request.
+⚠️ Note about google-services.json
 
-👤 Author
-Victor Enache
-📍 github.com/EnacheVictor
+The google-services.json file included in this repository is inactive and exists only as a placeholder.
 
-yaml
-Copy
-Edit
+🔄 To run the app:
+
+Go to firebase.google.com
+
+Create your own Firebase project
+
+Add an Android app with your package name
+
+Download your own google-services.json
+
+Replace the file inside the /app folder 
+   
+
+📜 License
+Licensed under the MIT License.   
+Free to use, modify, distribute – no liability.
+
+🙌 Credits   
+Created with ❤️ by EnacheVictor   
+Feel free to fork, remix, or share!
