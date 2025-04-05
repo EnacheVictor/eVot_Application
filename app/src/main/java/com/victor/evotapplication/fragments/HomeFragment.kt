@@ -68,10 +68,17 @@ class HomeFragment : Fragment() {
                     associationList.add(association)
                 }
                 binding.addResident.visibility = if (isUserAdmin) View.VISIBLE else View.GONE
+                binding.addInvoice.visibility = if (isUserAdmin) View.VISIBLE else View.GONE
                 adapter.notifyDataSetChanged()
                 binding.addResident.setOnClickListener {
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, AddResidentFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
+                binding.addInvoice.setOnClickListener {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, AddInvoiceFragment())
                         .addToBackStack(null)
                         .commit()
                 }

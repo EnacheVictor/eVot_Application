@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.victor.evotapplication.fragments.AboutUsFragment
 import com.victor.evotapplication.fragments.AssociationsFragment
 import com.victor.evotapplication.fragments.HomeFragment
+import com.victor.evotapplication.fragments.InvoiceFragment
 import com.victor.evotapplication.fragments.LogoutFragment
 import com.victor.evotapplication.fragments.SettingsFragment
 import com.victor.evotapplication.fragments.ShareFragment
@@ -60,7 +61,7 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
             R.id.nav_about -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AboutUsFragment()).commit()
             R.id.nav_logout -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LogoutFragment()).commit()
             R.id.nav_associations -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AssociationsFragment()).commit()
-
+            R.id.invoice -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, InvoiceFragment()).commit()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

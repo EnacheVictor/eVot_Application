@@ -1,4 +1,4 @@
-# 🗳️ eVot Application
+# 🗳️ eVot Application - still in development
 
 An Android app for managing community associations, announcements, and voting.  
 Admins can create associations, post announcements, launch polls, and manage users.  
@@ -6,7 +6,7 @@ Residents can join associations, view content, comment, and cast votes easily.
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshots - outdated to be changed once the app is fully ready
 
 | Login | Navigation | Create Association |
 |-------|------------|--------------------|
@@ -28,12 +28,16 @@ Residents can join associations, view content, comment, and cast votes easily.
 - Post and manage announcements
 - Create and cancel polls
 - View vote results
+- Chating (text , pictures, videos)
+- Soon: uploading invoices
 
 #### Resident:
 - Join associations via invite code
-- View announcements and post comments
+- View announcements , post comments
+- Chating (text , pictures, videos)
 - Vote once in each poll (cannot undo vote)
 - Cannot edit or cancel polls
+- Soon: download and pay invoices
 
 ---
 
@@ -42,6 +46,7 @@ Residents can join associations, view content, comment, and cast votes easily.
 - **Kotlin** + **Android Studio**
 - **Firebase Authentication**
 - **Firebase Firestore**
+- **Firebase Storage**
 - ViewPager2 + TabLayout
 - RecyclerView + Adapters
 - Material Design Components

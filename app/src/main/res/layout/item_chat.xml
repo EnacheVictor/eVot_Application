@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data />
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp"
+        android:gravity="start">
+
+        <LinearLayout
+            android:id="@+id/bubbleContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@drawable/chat_bubble_received"
+            android:elevation="2dp"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:id="@+id/senderNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textStyle="bold"
+                android:textColor="@color/purple_700"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/messageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Text"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="6dp"
+                android:visibility="gone" />
+
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="6dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

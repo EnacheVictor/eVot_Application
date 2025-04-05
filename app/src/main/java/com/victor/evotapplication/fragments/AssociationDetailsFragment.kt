@@ -17,6 +17,7 @@ class AssociationDetailsFragment : Fragment() {
     private lateinit var binding: FragmentAssociationDetailsBinding
     private var associationId: String? = null
     private var associationName: String? = null
+    private var associationLocation: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +27,7 @@ class AssociationDetailsFragment : Fragment() {
 
         associationId = arguments?.getString("associationId")
         associationName = arguments?.getString("associationName")
+        associationLocation = arguments?.getString("associationLocation")
 
         val pagerAdapter =
             AssociationPagerAdapter(this, associationId)
@@ -42,7 +44,7 @@ class AssociationDetailsFragment : Fragment() {
 
 
         binding.associationTitle.text = associationName ?: "Association"
-
+        binding.associationLoc.text = associationLocation ?: "AssociationLocation"
 
         return binding.root
     }
