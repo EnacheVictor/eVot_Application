@@ -46,7 +46,7 @@ class AssociationsFragment : Fragment() {
                 }
             }
             .addOnFailureListener { e ->
-                Log.e("Firestore", "Eroare la obținerea rolului", e)
+                Log.e("Firestore", "Error fetching user role", e)
             }
     }
 
@@ -148,18 +148,26 @@ class AssociationsFragment : Fragment() {
     private fun addUserToAssociation(assocId: String) {
         val userId = auth.currentUser?.uid ?: return
 
+        val userRef = db.collection("user-type").document(userId)
+
         db.collection("associations").document(assocId)
             .update("members", FieldValue.arrayUnion(userId))
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Joining successful!", Toast.LENGTH_SHORT).show()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, HomeFragment())
-                    .commit()
+
+                userRef.update("associations", FieldValue.arrayUnion(assocId))
+                    .addOnSuccessListener {
+                        Toast.makeText(requireContext(), "Joining successful!", Toast.LENGTH_SHORT).show()
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, HomeFragment())
+                            .commit()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), "Joined association, but failed to update user profile.", Toast.LENGTH_SHORT).show()
+                    }
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener {
                 Toast.makeText(requireContext(), "Joining error!", Toast.LENGTH_SHORT).show()
             }
-
     }
 }
 

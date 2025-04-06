@@ -6,15 +6,15 @@ Residents can join associations, view content, comment, and cast votes easily.
 
 ---
 
-## 📸 Screenshots - outdated to be changed once the app is fully ready
+## 📸 Screenshots
 
 | Login | Navigation | Create Association |
 |-------|------------|--------------------|
-| ![Login](screenshots/login.png) | ![Nav](screenshots/nav.png) | ![Create](screenshots/create.png) |
+| ![Login](screenshots/login.png) | ![Nav](screenshots/nav_updated.png) | ![Create](screenshots/create_updated.png) |
 
-| Announcements | Voting |
-|---------------|--------|
-| ![Announcements](screenshots/announcements.png) | ![Votes](screenshots/votes.png) |
+|Chat | Announcements | Voting |
+|-----|---------------|--------|
+|![Chat](screenshots/chat.png) | ![Announcements](screenshots/ann_updated.png) | ![Votes](screenshots/votes_updated.png) |
 
 ---
 
@@ -29,7 +29,7 @@ Residents can join associations, view content, comment, and cast votes easily.
 - Create and cancel polls
 - View vote results
 - Chating (text , pictures, videos)
-- Soon: uploading invoices
+- Uploading invoices
 
 #### Resident:
 - Join associations via invite code
@@ -37,7 +37,8 @@ Residents can join associations, view content, comment, and cast votes easily.
 - Chating (text , pictures, videos)
 - Vote once in each poll (cannot undo vote)
 - Cannot edit or cancel polls
-- Soon: download and pay invoices
+- Download invoices
+- Soon: Pay invoices
 
 ---
 
@@ -47,6 +48,7 @@ Residents can join associations, view content, comment, and cast votes easily.
 - **Firebase Authentication**
 - **Firebase Firestore**
 - **Firebase Storage**
+- **Firebase CLI functions**
 - ViewPager2 + TabLayout
 - RecyclerView + Adapters
 - Material Design Components
