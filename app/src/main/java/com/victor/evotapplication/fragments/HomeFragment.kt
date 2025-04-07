@@ -1,90 +1,62 @@
 package com.victor.evotapplication.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.victor.evotapplication.R
-import com.victor.evotapplication.models.Association
-import com.victor.evotapplication.adapters.AssociationAdapter
 import com.victor.evotapplication.databinding.FragmentHomeBinding
-
-// Home screen fragment displaying the list of associations the user is part of
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
-    private lateinit var adapter: AssociationAdapter
-    private val associationList = mutableListOf<Association>()
+    private val auth = FirebaseAuth.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
 
-        setupRecyclerView()
-        fetchUserAssociations()
+        checkUserRole()
+
+        binding.adminDashboardBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, AdminPanelFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.associationBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, AssociationsFragment())
+                .addToBackStack(null)
+                .commit()
+        }
 
         return binding.root
     }
 
-    private fun setupRecyclerView() {
-        adapter = AssociationAdapter(associationList)
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = adapter
-    }
+    private fun checkUserRole() {
+        val uid = auth.currentUser?.uid ?: return
+        db.collection("user-type").document(uid).get()
+            .addOnSuccessListener { doc ->
+                val role = doc.getString("role") ?: ""
+                val username = doc.getString("username") ?: "User"
 
-    // Fetches all associations where the current user is a member
+                binding.welcomeText.text = "Welcome, $username!"
 
-    private fun fetchUserAssociations() {
-        val userId = auth.currentUser?.uid ?: return
-
-        db.collection("associations")
-            .whereArrayContains("members", userId)
-            .get()
-            .addOnSuccessListener { documents ->
-                associationList.clear()
-                var isUserAdmin = false
-
-                for (document in documents) {
-                    val isAdmin = document.getString("adminId") == userId
-                    if (isAdmin) isUserAdmin = true
-
-                    val association = Association(
-                        id = document.id,
-                        name = document.getString("name") ?: "No name",
-                        location = document.getString("location") ?: "No location"
-                    )
-                    associationList.add(association)
-                }
-                binding.addResident.visibility = if (isUserAdmin) View.VISIBLE else View.GONE
-                binding.addInvoice.visibility = if (isUserAdmin) View.VISIBLE else View.GONE
-                adapter.notifyDataSetChanged()
-                binding.addResident.setOnClickListener {
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, AddResidentFragment())
-                        .addToBackStack(null)
-                        .commit()
-                }
-                binding.addInvoice.setOnClickListener {
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, AddInvoiceFragment())
-                        .addToBackStack(null)
-                        .commit()
+                if (role.equals("admin", ignoreCase = true)) {
+                    binding.adminDashboardBtn.visibility = View.VISIBLE
+                } else {
+                    binding.associationBtn.visibility = View.VISIBLE
                 }
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error when uploading!", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Error loading user info", Toast.LENGTH_SHORT).show()
             }
     }
 }

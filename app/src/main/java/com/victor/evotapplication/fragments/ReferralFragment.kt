@@ -9,7 +9,7 @@ import com.victor.evotapplication.R
 
 //Extra fragment yet to be implemented
 
-class ShareFragment : Fragment() {
+class ReferralFragment : Fragment() {
 
 
     override fun onCreateView(
