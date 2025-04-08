@@ -1,37 +1,90 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/light_purple"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20dp">
 
-    <EditText
-        android:id="@+id/voteQuestionInput"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
-        android:hint="Type the question for the vote" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/selectDeadlineBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pick deadline"
-        android:layout_marginTop="16dp" />
+        <!-- Title -->
+        <TextView
+            android:id="@+id/sectionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🗳️ Create Vote"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp" />
 
-    <TextView
-        android:id="@+id/selectedDeadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No date selected"
-        android:textColor="#222222"
-        android:layout_marginTop="8dp" />
+        <!-- Spinner Label -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Association:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
 
-    <Button
-        android:id="@+id/createVoteBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create Vote"
-        android:layout_marginTop="24dp" />
-</LinearLayout>
+        <!-- Spinner -->
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/spinner_bg"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Question Input -->
+        <EditText
+            android:id="@+id/voteQuestionInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type your voting question"
+            android:background="@drawable/input_bg"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/black"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Deadline Picker -->
+        <Button
+            android:id="@+id/selectDeadlineBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📅 Pick deadline"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Selected Deadline -->
+        <TextView
+            android:id="@+id/selectedDeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No date selected"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/createVoteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Create Vote"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="12dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.victor.evotapplication.adapters.AnnouncementsAdapter
 import com.victor.evotapplication.databinding.FragmentAnnouncementsBinding
 import java.util.*
@@ -50,19 +51,6 @@ class AnnouncementsFragment : Fragment() {
         setupRecyclerView()
         loadAnnouncements()
 
-        // Navigate to AddAnnouncementFragment
-
-        binding.addAnnouncementBtn.setOnClickListener {
-            val fragment = AddAnnouncementFragment()
-            fragment.arguments = Bundle().apply {
-                putString("associationId", associationId)
-            }
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
-
         return binding.root
     }
 
@@ -83,7 +71,7 @@ class AnnouncementsFragment : Fragment() {
 
         db.collection("announcements")
             .whereEqualTo("associationId", associationId)
-            .orderBy("timestamp")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 announcementsList.clear()
@@ -111,13 +99,6 @@ class AnnouncementsFragment : Fragment() {
         db.collection("associations").document(associationId!!)
             .get()
             .addOnSuccessListener { document ->
-                val adminId = document.getString("adminId")
-                isAdmin = (adminId == userId)
-
-                if (isAdmin) {
-                    binding.addAnnouncementBtn.visibility = View.VISIBLE
-                }
-
                 setupRecyclerView()
             }
             .addOnFailureListener {

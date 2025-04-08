@@ -3,42 +3,68 @@
 
     <data />
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/login"
-        android:padding="16dp">
+        android:padding="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginBottom="10dp"
-            android:text="Select association:" />
-
-        <Spinner
-            android:id="@+id/spinner"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/upload_excel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload Invoice"
-            android:layout_marginTop="10dp" />
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🧾 Upload Invoice"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginBottom="24dp"/>
 
-        <TextView
-            android:id="@+id/upload_status_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            <!-- Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select an association:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"/>
 
-    </LinearLayout>
+            <!-- Spinner -->
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
+                android:paddingHorizontal="12dp"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Upload Button -->
+            <Button
+                android:id="@+id/upload_excel_button"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/purple_500"
+                android:textColor="@android:color/white"
+                android:text="Upload Invoice"
+                android:textSize="16sp"
+                android:elevation="4dp"/>
+
+            <!-- Status Message -->
+            <TextView
+                android:id="@+id/upload_status_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text=""
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="italic"
+                android:textSize="14sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+    </ScrollView>
 </layout>

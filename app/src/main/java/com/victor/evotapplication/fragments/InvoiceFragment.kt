@@ -104,7 +104,7 @@ class InvoiceFragment : Fragment() {
         }
 
         val names = associationList.map { it.name }
-        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner, names)
+        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner2, names)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         binding.associationSpinner.adapter = spinnerAdapter
@@ -115,7 +115,8 @@ class InvoiceFragment : Fragment() {
                 loadInvoicesForAssociation(selectedAssociationId)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {}
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
         }
     }
 

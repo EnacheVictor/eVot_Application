@@ -1,35 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/light_purple"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    android:padding="20dp">
 
-    <EditText
-        android:id="@+id/titleInput"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Announcement title"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"/>
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-    <EditText
-        android:id="@+id/contentInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minLines="3"
-        android:hint="Announcement content"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
-        android:gravity="top"
-        android:layout_marginTop="8dp" />
+        <!-- Title -->
+        <TextView
+            android:id="@+id/sectionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📝 Create Announcement"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp" />
 
-    <Button
-        android:id="@+id/saveAnnouncementBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save announcement"
-        android:layout_marginTop="16dp"/>
-</LinearLayout>
+        <!-- Spinner Label -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Association:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
 
+        <!-- Spinner -->
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/spinner_bg"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Title Input -->
+        <EditText
+            android:id="@+id/titleInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter title"
+            android:background="@drawable/input_bg"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/black"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Content Input -->
+        <EditText
+            android:id="@+id/contentInput"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="Type your announcement here..."
+            android:gravity="top"
+            android:background="@drawable/input_bg"
+            android:padding="12dp"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/saveAnnouncementBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Announcement"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="12dp" />
+    </LinearLayout>
+</ScrollView>

@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.victor.evotapplication.R
 import com.victor.evotapplication.VoteAdapter
 import com.victor.evotapplication.databinding.FragmentVotesBinding
 import com.victor.evotapplication.models.Vote
-import java.util.*
 
 // Fragment for displaying and managing votes in an association
 
@@ -40,17 +38,6 @@ class VotesFragment : Fragment() {
 
         // Navigate to AddVoteFragment
 
-        binding.addVoteBtn.setOnClickListener {
-            val fragment = AddVoteFragment()
-            fragment.arguments = Bundle().apply {
-                putString("associationId", associationId)
-            }
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
-
         checkIfAdmin()
 
         return binding.root
@@ -66,9 +53,7 @@ class VotesFragment : Fragment() {
                 val adminId = document.getString("adminId")
                 isAdmin = adminId == userId
 
-                if (isAdmin) {
-                    binding.addVoteBtn.visibility = View.VISIBLE
-                }
+                //if (isAdmin) { }
 
                 setupRecyclerView()
                 loadVotes()

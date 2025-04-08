@@ -8,13 +8,6 @@
     android:padding="16dp"
     android:background="#FFFFFF">
 
-    <Button
-        android:id="@+id/addVoteBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create vote"
-        android:visibility="gone" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/votesRecycler"
         android:layout_width="match_parent"
