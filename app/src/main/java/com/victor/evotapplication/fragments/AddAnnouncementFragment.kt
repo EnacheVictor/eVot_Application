@@ -48,45 +48,54 @@ class AddAnnouncementFragment : Fragment() {
 
     private fun loadUserAssociations() {
         val userId = auth.currentUser?.uid ?: return
-        db.collection("associations")
-            .whereArrayContains("members", userId)
-            .get()
-            .addOnSuccessListener { result ->
-                userAssociations = result.map {
-                    Association(
-                        id = it.id,
-                        name = it.getString("name") ?: "Unnamed",
-                        location = it.getString("location") ?: "Unknown"
-                    )
+
+        db.collection("user-type").document(userId).get()
+            .addOnSuccessListener { userDoc ->
+                val role = userDoc.getString("role") ?: "locatar"
+
+                val query = if (role.lowercase() == "admin") {
+                    db.collection("associations").whereEqualTo("adminId", userId)
+                } else {
+                    db.collection("associations").whereArrayContains("members", userId)
                 }
 
-                val adapter = object : ArrayAdapter<String>(
-                    requireContext(),
-                    android.R.layout.simple_spinner_item,
-                    userAssociations.map { it.name }
-                ) {
-                    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-                        val view = super.getView(position, convertView, parent)
-                        (view as? TextView)?.setTextColor(
-                            resources.getColor(android.R.color.black, null)
-                        )
-                        return view
-                    }
-
-                    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-                        val view = super.getDropDownView(position, convertView, parent)
-                        (view as? TextView)?.apply {
-                            setTextColor(resources.getColor(android.R.color.white, null))
-                            setPadding(32, 24, 32, 24)
+                query.get()
+                    .addOnSuccessListener { result ->
+                        userAssociations = result.map {
+                            Association(
+                                id = it.id,
+                                name = it.getString("name") ?: "Unnamed",
+                                location = it.getString("location") ?: "Unknown"
+                            )
                         }
-                        return view
+
+                        val adapter = object : ArrayAdapter<String>(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            userAssociations.map { it.name }
+                        ) {
+                            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                                val view = super.getView(position, convertView, parent)
+                                (view as? TextView)?.setTextColor(resources.getColor(android.R.color.black, null))
+                                return view
+                            }
+
+                            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                                val view = super.getDropDownView(position, convertView, parent)
+                                (view as? TextView)?.apply {
+                                    setTextColor(resources.getColor(android.R.color.white, null))
+                                    setPadding(32, 24, 32, 24)
+                                }
+                                return view
+                            }
+                        }
+
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        binding.spinner.adapter = adapter
                     }
-                }
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.spinner.adapter = adapter
-            }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error loading associations", Toast.LENGTH_SHORT).show()
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), "Error loading associations", Toast.LENGTH_SHORT).show()
+                    }
             }
     }
 

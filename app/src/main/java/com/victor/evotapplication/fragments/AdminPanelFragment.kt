@@ -46,6 +46,13 @@ class AdminPanelFragment : Fragment() {
                 .commit()
         }
 
+        setupCard(binding.root.findViewById(R.id.createAssociation), R.drawable.group_add, "Create Association") {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, AddAssociationFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
         return binding.root
     }
 

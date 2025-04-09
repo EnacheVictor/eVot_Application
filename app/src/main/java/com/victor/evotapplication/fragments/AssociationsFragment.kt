@@ -70,34 +70,8 @@ class AssociationsFragment : Fragment() {
 
     private fun showAdminUI() {
         binding.adminLayout.visibility = View.VISIBLE
-
-        binding.createAssociationBtn.setOnClickListener {
-            val name = binding.assocNameInput.text.toString()
-            val location = binding.assocLocationInput.text.toString()
-
-            if (name.isEmpty() || location.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val adminId = auth.currentUser?.uid ?: return@setOnClickListener
-            val data = hashMapOf(
-                "name" to name,
-                "location" to location,
-                "adminId" to adminId,
-                "members" to listOf(adminId)
-            )
-
-            db.collection("associations").add(data)
-                .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Association created!", Toast.LENGTH_SHORT).show()
-                    fetchUserAssociations()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(requireContext(), "Error creating association", Toast.LENGTH_SHORT).show()
-                }
-        }
     }
+
 
     private fun showLocatarUI() {
         binding.locatarLayout.visibility = View.VISIBLE
@@ -157,24 +131,46 @@ class AssociationsFragment : Fragment() {
 
     private fun fetchUserAssociations() {
         val userId = auth.currentUser?.uid ?: return
-        db.collection("associations")
-            .whereArrayContains("members", userId)
-            .get()
-            .addOnSuccessListener { documents ->
-                associationList.clear()
-                for (doc in documents) {
-                    val assoc = Association(
-                        id = doc.id,
-                        name = doc.getString("name") ?: "No name",
-                        location = doc.getString("location") ?: "No location"
-                    )
-                    associationList.add(assoc)
+
+        if (userRole == "Admin") {
+            db.collection("associations")
+                .whereEqualTo("adminId", userId)
+                .get()
+                .addOnSuccessListener { documents ->
+                    associationList.clear()
+                    for (doc in documents) {
+                        val assoc = Association(
+                            id = doc.id,
+                            name = doc.getString("name") ?: "No name",
+                            location = doc.getString("location") ?: "No location"
+                        )
+                        associationList.add(assoc)
+                    }
+                    adapter.notifyDataSetChanged()
                 }
-                adapter.notifyDataSetChanged()
-            }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error loading associations", Toast.LENGTH_SHORT).show()
-            }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "Error loading admin associations", Toast.LENGTH_SHORT).show()
+                }
+        } else {
+            db.collection("associations")
+                .whereArrayContains("members", userId)
+                .get()
+                .addOnSuccessListener { documents ->
+                    associationList.clear()
+                    for (doc in documents) {
+                        val assoc = Association(
+                            id = doc.id,
+                            name = doc.getString("name") ?: "No name",
+                            location = doc.getString("location") ?: "No location"
+                        )
+                        associationList.add(assoc)
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "Error loading user associations", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 }
 

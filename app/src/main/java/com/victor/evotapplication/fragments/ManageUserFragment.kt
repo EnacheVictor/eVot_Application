@@ -32,7 +32,7 @@ class ManageUserFragment : Fragment() {
 
         setupCard(removeResidentCard, R.drawable.remove_user, "Remove Resident") {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, removeFragment())
+                .replace(R.id.fragment_container, RemoveFragment())
                 .addToBackStack(null)
                 .commit()
         }

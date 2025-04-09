@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/login"
+    android:background="@color/white"
     android:padding="16dp">
 
     <!-- UI for Admin -->
@@ -15,28 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/assocNameInput"
-            android:hint="Name of association:"
-            android:textColorHint="@color/black"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/assocLocationInput"
-            android:hint="Location of association:"
-            android:textColorHint="@color/text_dark"
-            android:textSize="12dp"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/createAssociationBtn"
-            android:text="Create Association"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,21 +25,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingBottom="10dp" />
-
-        <Button
-            android:id="@+id/add_resident"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="Add Resident" />
-
-        <Button
-            android:id="@+id/add_invoice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:visibility="gone"
-            android:text="Add Invoice" />
 
     </LinearLayout>
 
