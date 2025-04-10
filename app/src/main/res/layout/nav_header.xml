@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="180dp"
     android:gravity="bottom"
     android:background="@drawable/gradient_header"
     android:padding="16dp"
@@ -12,13 +12,11 @@
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="59dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:padding="4dp"
+        android:layout_height="59dp"
+        android:src="@drawable/ic_user_placeholder"
         android:scaleType="centerCrop"
-
-        android:src="@drawable/ic_user_placeholder" />
+        android:padding="4dp"
+        android:layout_marginBottom="6dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,10 +44,6 @@
         android:text="role"
         android:textColor="@color/white"
         android:textSize="14sp" />
-
-
-
-
 
 
 </LinearLayout>

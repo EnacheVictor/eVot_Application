@@ -15,18 +15,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🏘 Associations"
+            android:text="🏘 Join Associations"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp"/>
-
-        <!-- RECYCLER VIEW -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <EditText
+            android:id="@+id/joinCodeInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp" />
+            android:hint="🔑 Insert invite code"
+            android:background="@drawable/input_bg"
+            android:padding="12dp"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/joinAssociationBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Join Association"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/purple_500"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
     </LinearLayout>
 </ScrollView>

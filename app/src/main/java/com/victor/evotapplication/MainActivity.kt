@@ -14,67 +14,70 @@ import com.victor.evotapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // Entry activity of the app; handles login and navigation to sign-up
-
     private lateinit var auth: FirebaseAuth
-    lateinit var  binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
         auth = Firebase.auth
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.createAccBTN.setOnClickListener {
-            var intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+
         binding.emailSignInButton.setOnClickListener {
             signInWithEmailAndPassword(
                 binding.email.text.toString().trim(),
                 binding.password.text.toString().trim()
             )
         }
-        }
 
-    public override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-           goToLogInActivity() // te pastreaza conectat
+        binding.forgotPassword.setOnClickListener {
+            val email = binding.email.text.toString().trim()
+
+            if (email.isEmpty()) {
+                Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show()
+            } else {
+                auth.sendPasswordResetEmail(email)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Password reset link sent to your email", Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed to send reset email: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            }
         }
     }
 
-    fun goToLogInActivity() {
-        var intent = Intent(this, LogInActivity::class.java)
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            goToLogInActivity()
+        }
+    }
+
+    private fun goToLogInActivity() {
+        val intent = Intent(this, LogInActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    // Handles email/password authentication using Firebase
-
-    fun signInWithEmailAndPassword(email: String , password:String)
-    {
+    private fun signInWithEmailAndPassword(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d("TAGY", "signInWithEmail:success")
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication success.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    Toast.makeText(this, "Authentication success.", Toast.LENGTH_SHORT).show()
                     goToLogInActivity()
                 } else {
                     Log.w("TAGY", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 }
-
