@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Select Association"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="12dp"/>
+
+            <Spinner
+                android:id="@+id/associationSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_bg"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Select User"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="12dp"/>
+
+
+            <Spinner
+                android:id="@+id/userSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_bg"
+                android:layout_marginBottom="20dp"/>
+
+            <CheckBox
+                android:id="@+id/selfAssignCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Setează pentru mine"
+                android:textColor="@color/text_dark"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/apartmentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter apartment (e.g. Ap 15)"
+                android:layout_marginBottom="16dp"
+                android:textColorHint="@color/text_dark"
+                android:textColor="@color/text_dark"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/parkingEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter parking spot (e.g. Lp 01)"
+                android:textColor="@color/text_dark"
+                android:textColorHint="@color/text_dark"
+                android:inputType="text"
+                android:layout_marginBottom="24dp"/>
+
+            <Button
+                android:id="@+id/linkButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Link User"
+                android:backgroundTint="@color/purple_500"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </ScrollView>
+</layout>

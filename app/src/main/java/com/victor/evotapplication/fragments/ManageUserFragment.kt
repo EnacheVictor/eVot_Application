@@ -18,10 +18,10 @@ class ManageUserFragment : Fragment() {
     ): View {
         binding = FragmentManageUserBinding.inflate(inflater, container, false)
 
-        // Găsim cardurile folosind ID-urile din <include>
         val addResidentCard = binding.root.findViewById<View>(R.id.cardAddResident)
         val removeResidentCard = binding.root.findViewById<View>(R.id.cardRemoveResident)
         val listUsersCard = binding.root.findViewById<View>(R.id.cardList_of_residents)
+        val linkUsersCard = binding.root.findViewById<View>(R.id.cardLink_users)
 
         setupCard(addResidentCard, R.drawable.person_add, "Add Resident") {
             parentFragmentManager.beginTransaction()
@@ -44,10 +44,16 @@ class ManageUserFragment : Fragment() {
                 .commit()
         }
 
+        setupCard(linkUsersCard, R.drawable.list_user, "User to property") {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, LinkUserFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
         return binding.root
     }
 
-    // Funcție pentru a configura fiecare card
     private fun setupCard(view: View, iconRes: Int, labelText: String, onClick: () -> Unit) {
         val icon = view.findViewById<ImageView>(R.id.cardIcon)
         val label = view.findViewById<TextView>(R.id.cardLabel)

@@ -41,6 +41,7 @@ class SettingsFragment : Fragment() {
         storage = FirebaseStorage.getInstance()
 
         loadUserInfo()
+        loadNotificationPreferences()
 
         binding.changeImageBtn.setOnClickListener {
             imagePicker.launch("image/*")
@@ -81,6 +82,10 @@ class SettingsFragment : Fragment() {
                 val username = doc.getString("username") ?: ""
                 binding.usernameInput.setText(username)
 
+                val apartment = doc.getString("apartment") ?: "Nespecificat"
+                val parking = doc.getString("parking") ?: "Nespecificat"
+                binding.propertiesTextView.text = "🏠 Proprietăți:\n• Apartament: $apartment\n• Loc parcare: $parking"
+
                 val imageUrl = doc.getString("profileImageUrl")
                 if (!imageUrl.isNullOrEmpty()) {
                     Glide.with(requireContext())
@@ -90,6 +95,37 @@ class SettingsFragment : Fragment() {
                         .into(binding.profileImageView)
                 }
             }
+    }
+
+    private fun loadNotificationPreferences() {
+        val uid = auth.currentUser?.uid ?: return
+
+        db.collection("user-type").document(uid).get()
+            .addOnSuccessListener { doc ->
+                binding.switchRentSell.isChecked = doc.getBoolean("notifRentSell") ?: true
+                binding.switchAnnouncements.isChecked = doc.getBoolean("notifAnn") ?: true
+                binding.switchVotes.isChecked = doc.getBoolean("notifVotes") ?: true
+                binding.switchInvoices.isChecked = doc.getBoolean("notifInvoices") ?: true
+                binding.switchMessage.isChecked = doc.getBoolean("notifMes") ?: true
+            }
+
+        val listener = View.OnClickListener {
+            val prefs = mapOf(
+                "notifRentSell" to binding.switchRentSell.isChecked,
+                "notifAnn" to binding.switchAnnouncements.isChecked,
+                "notifVotes" to binding.switchVotes.isChecked,
+                "notifInvoices" to binding.switchInvoices.isChecked,
+                "notifMes" to binding.switchMessage.isChecked
+            )
+            db.collection("user-type").document(uid).update(prefs)
+        }
+
+       binding.switchRentSell.setOnClickListener(listener)
+       binding.switchAnnouncements.setOnClickListener(listener)
+       binding.switchVotes.setOnClickListener(listener)
+       binding.switchInvoices.setOnClickListener(listener)
+       binding.switchMessage.setOnClickListener(listener)
+
     }
 
     private fun uploadProfileImage(uri: Uri) {

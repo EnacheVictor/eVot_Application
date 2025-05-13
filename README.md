@@ -8,13 +8,13 @@ Residents can join associations, view content, comment, and cast votes easily.
 
 ## 📸 Screenshots
 
-| Login | Navigation | Create Association |
+| Login | Admin Control Room | Settings |
 |-------|------------|--------------------|
-| ![Login](screenshots/login.png) | ![Nav](screenshots/nav_updated.png) | ![Create](screenshots/create_updated.png) |
+| ![Login](screenshots/new_login.png) | ![Admin](screenshots/admin.png) | ![Settings](screenshots/settings.png) |
 
-|Chat | Announcements | Voting |
+|Chat | Pay Invoice |
 |-----|---------------|--------|
-|![Chat](screenshots/chat.png) | ![Announcements](screenshots/ann_updated.png) | ![Votes](screenshots/votes_updated.png) |
+|![Chat](screenshots/new_chat.png) | ![Pay](screenshots/pay_invoice.png) | 
 
 ---
 

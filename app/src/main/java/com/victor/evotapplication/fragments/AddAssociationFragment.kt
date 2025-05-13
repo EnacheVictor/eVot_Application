@@ -45,7 +45,6 @@ class AddAssociationFragment : Fragment() {
             db.collection("associations")
                 .add(association)
                 .addOnSuccessListener { documentRef ->
-                    // 👇 Adaugă asociația și în lista adminului
                     val assocId = documentRef.id
                     db.collection("user-type").document(adminId!!).update(
                         "associations", FieldValue.arrayUnion(assocId)

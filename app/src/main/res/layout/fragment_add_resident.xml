@@ -3,15 +3,11 @@
 
     <data />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/login"
-        android:padding="24dp">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="24dp"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
@@ -61,5 +57,4 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="24dp" />
         </LinearLayout>
-    </ScrollView>
 </layout>

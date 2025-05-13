@@ -15,7 +15,7 @@
 
         <item
             android:id="@+id/invoice"
-            android:title="Maintenance invoice"/>
+            android:title="Invoices"/>
 
         <item
             android:id="@+id/adminPanel"
@@ -26,6 +26,10 @@
             android:id="@+id/joinAssociation"
             android:title="Join Association"
             android:visible="false"/>
+
+        <item
+            android:id="@+id/pay_invoice"
+            android:title="Pay invoice"/>
 
     </group>
     <item
@@ -38,15 +42,23 @@
                     android:title="Settings"/>
 
                 <item
-                android:id="@+id/nav_share"
-                android:title="Refer us"/>
-            <item
-                android:id="@+id/nav_about"
-                android:title="About Us"/>
+                    android:id="@+id/rent_sell"
+                    android:title="Rent/Sell" />
 
-            <item
-                android:id="@+id/nav_logout"
-                android:title="Logout"/>
+                <item
+                    android:id="@+id/nav_specialists"
+                    android:title="Specialists" />
+
+                <item
+                    android:id="@+id/nav_share"
+                    android:title="Refer us"/>
+                <item
+                    android:id="@+id/nav_about"
+                    android:title="About Us"/>
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="Logout"/>
             </group>
         </menu>
     </item>

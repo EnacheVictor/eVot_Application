@@ -15,6 +15,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.victor.evotapplication.databinding.FragmentAddInvoiceBinding
 import com.victor.evotapplication.models.Association
+import org.apache.poi.ss.usermodel.WorkbookFactory
+import java.util.*
 
 class AddInvoiceFragment : Fragment() {
 
@@ -99,9 +101,7 @@ class AddInvoiceFragment : Fragment() {
                 ) {
                     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                         val view = super.getView(position, convertView, parent)
-                        (view as? TextView)?.setTextColor(
-                            resources.getColor(android.R.color.black, null)
-                        )
+                        (view as? TextView)?.setTextColor(resources.getColor(android.R.color.black, null))
                         return view
                     }
 
@@ -126,54 +126,88 @@ class AddInvoiceFragment : Fragment() {
     private fun uploadInvoiceFile(associationId: String) {
         selectedAssociationId = associationId
         val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "*/*"
+        intent.type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         filePickerLauncher.launch(intent)
     }
 
     private fun performUpload(associationId: String, fileUri: Uri, fileName: String) {
+        val inputStream = requireContext().contentResolver.openInputStream(fileUri)
+        val workbook = WorkbookFactory.create(inputStream)
+        val sheet = workbook.getSheetAt(0)
+
+        val headerRow = sheet.getRow(0)
+        val headers = mutableListOf<String>()
+        for (i in 0 until headerRow.lastCellNum) {
+            headers.add(headerRow.getCell(i)?.toString()?.trim() ?: "")
+        }
+
+        val apartments = mutableMapOf<String, Any>()
+        for (i in 1..sheet.lastRowNum) {
+            val row = sheet.getRow(i) ?: continue
+            val apt = row.getCell(0)?.toString()?.trim() ?: continue
+
+            var total = 0.0
+            val components = mutableMapOf<String, Double>()
+            for (j in 1 until headers.size) {
+                val rubric = headers[j].lowercase()
+                if (rubric.contains("parcare")) continue
+                val value = row.getCell(j)?.numericCellValue ?: 0.0
+                total += value
+                components[headers[j]] = value
+            }
+
+            apartments[apt] = mapOf(
+                "total" to total,
+                "paid" to false,
+                "components" to components
+            )
+        }
+
         val storageRef = FirebaseStorage.getInstance().reference
         val path = "invoices/$associationId/${System.currentTimeMillis()}.pdf"
         val fileRef = storageRef.child(path)
 
-        binding.uploadStatusText.text = "⏳ Upload in progres..."
+        binding.uploadStatusText.text = "⏳ Upload în progres..."
 
         fileRef.putFile(fileUri)
             .addOnSuccessListener {
                 fileRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                    saveInvoiceRecord(associationId, downloadUri.toString(), fileName)
+                    val userId = auth.currentUser?.uid ?: return@addOnSuccessListener
+                    db.collection("user-type").document(userId).get()
+                        .addOnSuccessListener { userDoc ->
+                            val uploaderName = userDoc.getString("username") ?: "Unknown"
+
+                            val invoice = mapOf(
+                                "url" to downloadUri.toString(),
+                                "fileName" to fileName,
+                                "month" to fileName,
+                                "timestamp" to System.currentTimeMillis(),
+                                "dueDate" to getDueDateMillis(),
+                                "uploadedBy" to uploaderName,
+                                "apartments" to apartments
+                            )
+
+                            db.collection("associations")
+                                .document(associationId)
+                                .collection("invoices")
+                                .add(invoice)
+                                .addOnSuccessListener {
+                                    binding.uploadStatusText.text = "✅ Factura încărcată!"
+                                    Toast.makeText(requireContext(), "Factura a fost salvată.", Toast.LENGTH_SHORT).show()
+                                }
+                        }
                 }
             }
             .addOnFailureListener {
-                binding.uploadStatusText.text = "❌ Upload failed"
-                Toast.makeText(requireContext(), "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+                binding.uploadStatusText.text = "❌ Upload eșuat"
+                Toast.makeText(requireContext(), "Eroare: ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun saveInvoiceRecord(associationId: String, fileUrl: String, fileName: String) {
-        val userId = auth.currentUser?.uid ?: return
-
-        db.collection("user-type").document(userId).get()
-            .addOnSuccessListener { userDoc ->
-                val uploaderName = userDoc.getString("username") ?: "Unknown"
-
-                val invoice = mapOf(
-                    "url" to fileUrl,
-                    "fileName" to fileName,
-                    "timestamp" to System.currentTimeMillis(),
-                    "uploadedBy" to uploaderName
-                )
-
-                db.collection("associations")
-                    .document(associationId)
-                    .collection("invoices")
-                    .add(invoice)
-                    .addOnSuccessListener {
-                        binding.uploadStatusText.text = "✅ Invoice uploaded!"
-                        Toast.makeText(requireContext(), "Invoice uploaded!", Toast.LENGTH_SHORT).show()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(requireContext(), "❌ Error uploading invoice", Toast.LENGTH_SHORT).show()
-                    }
-            }
+    private fun getDueDateMillis(): Long {
+        val cal = Calendar.getInstance()
+        cal.add(Calendar.MONTH, 1)
+        cal.set(Calendar.DAY_OF_MONTH, 15)
+        return cal.timeInMillis
     }
 }

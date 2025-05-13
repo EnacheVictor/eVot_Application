@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.victor.evotapplication.R
 import com.victor.evotapplication.adapters.InvoiceAdapter
 import com.victor.evotapplication.databinding.FragmentInvoiceBinding
@@ -90,6 +91,7 @@ class InvoiceFragment : Fragment() {
                 Toast.makeText(context, "Error loading user data", Toast.LENGTH_SHORT).show()
             }
     }
+
     private fun processAssociationDocuments(docs: Iterable<com.google.firebase.firestore.DocumentSnapshot>) {
         associationList.clear()
 
@@ -115,17 +117,15 @@ class InvoiceFragment : Fragment() {
                 loadInvoicesForAssociation(selectedAssociationId)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
-
 
     private fun loadInvoicesForAssociation(associationId: String) {
         db.collection("associations")
             .document(associationId)
             .collection("invoices")
-            .orderBy("timestamp")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { docs ->
                 invoiceList.clear()
@@ -134,7 +134,7 @@ class InvoiceFragment : Fragment() {
                     val fileName = doc.getString("fileName") ?: continue
                     val timestamp = doc.getLong("timestamp") ?: 0L
                     val uploadedBy = doc.getString("uploadedBy") ?: "Necunoscut"
-                    invoiceList.add(Invoice(url, fileName , timestamp, uploadedBy))
+                    invoiceList.add(Invoice(url, fileName, timestamp, uploadedBy))
                 }
                 adapter.notifyDataSetChanged()
             }

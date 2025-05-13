@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import com.victor.evotapplication.fragments.AboutUsFragment
 import com.victor.evotapplication.fragments.AdminPanelFragment
 import com.victor.evotapplication.fragments.AssociationsFragment
@@ -20,8 +21,11 @@ import com.victor.evotapplication.fragments.HomeFragment
 import com.victor.evotapplication.fragments.InvoiceFragment
 import com.victor.evotapplication.fragments.JoinAssociation
 import com.victor.evotapplication.fragments.LogoutFragment
+import com.victor.evotapplication.fragments.PayInvoiceFragment
 import com.victor.evotapplication.fragments.SettingsFragment
 import com.victor.evotapplication.fragments.ReferralFragment
+import com.victor.evotapplication.fragments.RentSell
+import com.victor.evotapplication.fragments.Specialists
 
 // Main activity that handles navigation drawer and fragment switching
 
@@ -84,6 +88,16 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
 
             R.id.joinAssociation -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, JoinAssociation()).commit()
+
+            R.id.rent_sell -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, RentSell()).commit()
+
+            R.id.nav_specialists -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, Specialists()).commit()
+
+            R.id.pay_invoice -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, PayInvoiceFragment()).commit()
+
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
@@ -98,17 +112,19 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
         val navUsername = headerView.findViewById<TextView>(R.id.username)
         val navEmail = headerView.findViewById<TextView>(R.id.email)
         val navRole = headerView.findViewById<TextView>(R.id.role)
+        val profileImageView = headerView.findViewById<ImageView>(R.id.profile_image)
 
         val menu = navView.menu
         val adminPanelItem = menu.findItem(R.id.adminPanel)
         val joinAssociationItem = menu.findItem(R.id.joinAssociation)
 
         val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            val uid = user.uid
+        user?.let { currentUser ->
+            val uid = currentUser.uid
             val db = FirebaseFirestore.getInstance()
             val userRef = db.collection("user-type").document(uid)
 
+            // 🔄 Obține datele utilizatorului
             userRef.get().addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val username = document.getString("username") ?: "Unknown"
@@ -119,8 +135,6 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
                     navUsername.text = username
                     navEmail.text = email
                     navRole.text = role
-
-                    val profileImageView = headerView.findViewById<ImageView>(R.id.profile_image)
 
                     Glide.with(this)
                         .load(profileImageUrl ?: R.drawable.ic_user_placeholder)
@@ -136,6 +150,14 @@ class LogInActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
                         adminPanelItem.isVisible = false
                         joinAssociationItem.isVisible = true
                     }
+                }
+            }
+
+            // ✅ Salvează tokenul FCM
+            FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
+                if (!token.isNullOrBlank()) {
+                    db.collection("user-type").document(uid)
+                        .update("fcmToken", token)
                 }
             }
         }

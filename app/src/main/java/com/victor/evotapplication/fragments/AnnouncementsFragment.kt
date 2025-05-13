@@ -32,11 +32,11 @@ class AnnouncementsFragment : Fragment() {
     private lateinit var binding: FragmentAnnouncementsBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+
     private var associationId: String? = null
     private val announcementsList = ArrayList<Announcement>()
     private lateinit var adapter: AnnouncementsAdapter
     private var isAdmin: Boolean = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,28 +47,46 @@ class AnnouncementsFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
 
         associationId = arguments?.getString("associationId")
-        checkIfAdmin()
-        setupRecyclerView()
-        loadAnnouncements()
+
+        if (associationId == null) {
+            Toast.makeText(requireContext(), "Association not found", Toast.LENGTH_SHORT).show()
+            return binding.root
+        }
+
+        checkIfAdminAndLoad()
 
         return binding.root
     }
 
-    // Configures RecyclerView and attaches the adapter
+    private fun checkIfAdminAndLoad() {
+        val userId = auth.currentUser?.uid ?: return
+
+        db.collection("associations").document(associationId!!)
+            .get()
+            .addOnSuccessListener { document ->
+                val adminId = document.getString("adminId")
+                isAdmin = adminId == userId
+
+                setupRecyclerView()
+                loadAnnouncements()
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Checking admin role failed", Toast.LENGTH_SHORT).show()
+            }
+    }
 
     private fun setupRecyclerView() {
-        adapter = AnnouncementsAdapter(announcementsList,
+        adapter = AnnouncementsAdapter(
+            announcements = announcementsList,
             isAdmin = isAdmin,
-            onDelete = { ann -> deleteAnnouncement(ann) },
-            onEdit = { ann -> editAnnouncement(ann) })
+            onDelete = { announcement -> deleteAnnouncement(announcement) },
+            onEdit = { announcement -> editAnnouncement(announcement) }
+        )
         binding.announcementsRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.announcementsRecycler.adapter = adapter
     }
 
-    // Fetches announcements from Firestore for the current association
-
     private fun loadAnnouncements() {
-
         db.collection("announcements")
             .whereEqualTo("associationId", associationId)
             .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -76,37 +94,22 @@ class AnnouncementsFragment : Fragment() {
             .addOnSuccessListener { documents ->
                 announcementsList.clear()
                 for (doc in documents) {
-                    val ann = Announcement(
-                        id = doc.id,
-                        title = doc.getString("title") ?: "",
-                        content = doc.getString("content") ?: "",
-                        createdByUsername = doc.getString("createdByUsername") ?: "Anonim",
-                        timestamp = doc.getTimestamp("timestamp")?.toDate()
+                    announcementsList.add(
+                        Announcement(
+                            id = doc.id,
+                            title = doc.getString("title") ?: "",
+                            content = doc.getString("content") ?: "",
+                            createdByUsername = doc.getString("createdByUsername") ?: "Anonim",
+                            timestamp = doc.getTimestamp("timestamp")?.toDate()
+                        )
                     )
-                    announcementsList.add(ann)
                 }
                 adapter.notifyDataSetChanged()
             }
-            .addOnFailureListener { exception ->
-                Toast.makeText(requireContext(), "Error showing announcements", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun checkIfAdmin() {
-        val userId = auth.currentUser?.uid ?: return
-        if (associationId == null) return
-
-        db.collection("associations").document(associationId!!)
-            .get()
-            .addOnSuccessListener { document ->
-                setupRecyclerView()
-            }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Checking role error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error loading announcements", Toast.LENGTH_SHORT).show()
             }
     }
-
-    // Deletes an announcement from Firestore and refreshes list
 
     private fun deleteAnnouncement(announcement: Announcement) {
         db.collection("announcements").document(announcement.id)
@@ -116,11 +119,9 @@ class AnnouncementsFragment : Fragment() {
                 loadAnnouncements()
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error when deleting", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error deleting announcement", Toast.LENGTH_SHORT).show()
             }
     }
-
-    // Navigates to EditAnnouncementFragment and passes current announcement data
 
     private fun editAnnouncement(announcement: Announcement) {
         val fragment = EditAnnouncementFragment()
@@ -135,5 +136,4 @@ class AnnouncementsFragment : Fragment() {
             .addToBackStack(null)
             .commit()
     }
-
 }

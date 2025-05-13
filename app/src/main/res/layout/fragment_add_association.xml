@@ -3,15 +3,13 @@
 
     <data />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:padding="24dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="24dp"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
@@ -62,5 +60,4 @@
                 android:textSize="16sp"
                 android:elevation="4dp" />
         </LinearLayout>
-    </ScrollView>
 </layout>

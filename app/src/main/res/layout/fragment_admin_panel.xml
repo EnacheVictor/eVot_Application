@@ -1,72 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:padding="16dp">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Admin Control Room"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <include
+                android:id="@+id/cardManageResident"
+                layout="@layout/item_admin_card"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Admin Control Room"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_marginBottom="24dp" />
+                android:layout_columnWeight="1" />
 
-            <GridLayout
-                android:layout_width="match_parent"
+            <include
+                android:id="@+id/cardAddInvoice"
+                layout="@layout/item_admin_card"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:useDefaultMargins="true"
-                android:alignmentMode="alignMargins">
+                android:layout_columnWeight="1" />
 
-                <include
-                    android:id="@+id/cardManageResident"
-                    layout="@layout/item_admin_card"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1" />
+            <include
+                android:id="@+id/cardAddAnnouncement"
+                layout="@layout/item_admin_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1" />
 
-                <include
-                    android:id="@+id/cardAddInvoice"
-                    layout="@layout/item_admin_card"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1" />
+            <include
+                android:id="@+id/cardCreateVote"
+                layout="@layout/item_admin_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1" />
 
-                <include
-                    android:id="@+id/cardAddAnnouncement"
-                    layout="@layout/item_admin_card"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1" />
+            <include
+                android:id="@+id/createAssociation"
+                layout="@layout/item_admin_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1" />
 
-                <include
-                    android:id="@+id/cardCreateVote"
-                    layout="@layout/item_admin_card"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1" />
-
-                <include
-                    android:id="@+id/createAssociation"
-                    layout="@layout/item_admin_card"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1" />
-
-            </GridLayout>
-        </LinearLayout>
-    </ScrollView>
+        </GridLayout>
+    </LinearLayout>
 </layout>

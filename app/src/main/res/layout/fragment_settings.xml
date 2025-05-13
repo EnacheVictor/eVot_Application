@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="16dp">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:padding="16dp"
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
@@ -17,7 +15,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_user_placeholder"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/circle_bg"
             android:padding="4dp"
             android:scaleType="centerCrop" />
@@ -35,7 +33,7 @@
             android:text="Change Username"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="16dp" />
 
         <EditText
             android:id="@+id/usernameInput"
@@ -57,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Change Password"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="16dp" />
 
         <Button
             android:id="@+id/deleteAccountBtn"
@@ -68,6 +66,65 @@
             android:textColor="@android:color/white"
             android:backgroundTint="@color/red" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notificări preferențiale"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/black" />
+
+    <Switch
+        android:id="@+id/switchRentSell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Anunțuri Rent/Sell"
+        android:textColor="@color/text_dark"
+        android:checked="true" />
+
+    <Switch
+        android:id="@+id/switchAnnouncements"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Anunturi Asociatie"
+        android:textColor="@color/text_dark"
+        android:checked="true" />
+
+    <Switch
+        android:id="@+id/switchMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mesaje Asociatie"
+        android:textColor="@color/text_dark"
+        android:checked="true" />
+
+    <Switch
+        android:id="@+id/switchVotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Voturi Asociatie"
+        android:textColor="@color/text_dark"
+        android:checked="true" />
+
+    <Switch
+        android:id="@+id/switchInvoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Facturi"
+        android:textColor="@color/text_dark"
+        android:checked="true" />
+
+    <TextView
+        android:id="@+id/propertiesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🏠 Proprietăți: "
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,5 +133,5 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
             android:layout_marginTop="24dp" />
+
     </LinearLayout>
-</ScrollView>

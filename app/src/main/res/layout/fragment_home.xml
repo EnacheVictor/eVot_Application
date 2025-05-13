@@ -7,8 +7,9 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:background="@drawable/login">
+        android:background="@color/white"
+        android:padding="24dp">
+
 
         <TextView
             android:id="@+id/welcomeText"
@@ -18,13 +19,13 @@
             android:text="Welcome!"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginTop="-60dp"
+            android:layout_marginTop="60dp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is SimpleHome – more than just a regular platform for bills . We are creating a LifeStyle."
+            android:text="This is Oblico - more than just a simple management platform, We encourage organized living"
             android:gravity="center"
             android:textColor="@color/black"
             android:layout_marginBottom="24dp" />
@@ -47,6 +48,15 @@
             android:visibility="gone"
             android:backgroundTint="@color/purple_500"
             android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="-200dp"
+            android:src="@drawable/oblicologo" />
 
     </LinearLayout>
 </layout>

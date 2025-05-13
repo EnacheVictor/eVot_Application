@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Spinner alegere asociație -->
+    <Spinner
+        android:id="@+id/spinnerAssociation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <!-- TextView "Filtru Avansat" -->
+    <TextView
+        android:id="@+id/textViewAdvancedFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerAssociation"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Filtru avansat"
+        android:textColor="#6200EE"
+        android:textSize="16sp"
+        android:drawableLeft="@drawable/ic_filter"
+        android:drawablePadding="8dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <!-- RecyclerView anunțuri -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewListings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textViewAdvancedFilter"
+        android:padding="8dp" />
+
+    <!-- FloatingActionButton pentru adăugare anunț -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddListing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Adaugă anunț" />
+</RelativeLayout>

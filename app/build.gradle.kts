@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.victor.evotapplication"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -60,6 +60,12 @@ dependencies {
     implementation ("com.google.firebase:firebase-storage-ktx")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     kapt ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation ("com.afollestad.material-dialogs:core:3.3.0")
+    implementation ("com.google.firebase:firebase-messaging")
+    implementation ("org.apache.poi:poi-ooxml:5.2.3")
+
+
+
 
 
 }
