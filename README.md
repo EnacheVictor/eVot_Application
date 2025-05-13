@@ -13,8 +13,8 @@ Residents can join associations, view content, comment, and cast votes easily.
 | ![Login](screenshots/new_login.png) | ![Admin](screenshots/admin.png) | ![Settings](screenshots/settings.png) |
 
 |Chat | Pay Invoice |
-|-----|---------------|--------|
-|![Chat](screenshots/new_chat.png) | ![Pay](screenshots/pay_invoice.png) | 
+|-----|---------------|
+| ![Chat](screenshots/new_chat.png) | ![Pay](screenshots/pay_invoice.png) | 
 
 ---
 
